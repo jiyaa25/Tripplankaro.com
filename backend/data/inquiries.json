@@ -1,0 +1,18 @@
+[
+  {
+    "id": "a6e74c50",
+    "created_at": "2026-09-06T20:23:21.440771",
+    "status": "contacted",
+    "tour_id": null,
+    "tour_name": "Goa Coastal Villa",
+    "name": "Bhavik Gandhi",
+    "phone": "+91 98250 12345",
+    "email": "bhavik@example.com",
+    "squad_size": 4,
+    "departure_city": "Surat",
+    "travel_date": "2026-11-15",
+    "meal_preference": "Pure Vegetarian",
+    "notes": "Looking for private pool villa close to North Goa cafes",
+    "updated_at": "2026-09-06T20:23:21.445481"
+  }
+]
