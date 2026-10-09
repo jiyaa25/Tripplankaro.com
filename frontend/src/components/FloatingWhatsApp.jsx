@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { MessageCircle, X } from 'lucide-react';
-
-const PHONE = '919023532824';
+import companyData from '../data/company.json';
+import { createWhatsAppLink } from '../utils/whatsapp';
 
 export default function FloatingWhatsApp() {
   const [showTooltip, setShowTooltip] = useState(true);
+
+  const waUrl = createWhatsAppLink(
+    'Hey Tripplankaro team! 👋 I\'m looking to plan a trip. Can you help me find the best itinerary?'
+  );
 
   return (
     <div style={{
@@ -31,10 +35,10 @@ export default function FloatingWhatsApp() {
           display: 'flex',
           alignItems: 'center',
           gap: '8px',
-          maxWidth: '220px',
+          maxWidth: '230px',
           animation: 'slideUp 0.3s ease'
         }}>
-          <span>Need help planning a trip? Chat with us! ✈️</span>
+          <span>Need trip advice? Chat with our team! ✈️</span>
           <button
             onClick={() => setShowTooltip(false)}
             style={{
@@ -53,15 +57,15 @@ export default function FloatingWhatsApp() {
 
       {/* Floating Circle Button */}
       <a
-        href={`https://wa.me/${PHONE}?text=Hey%20TripPlanKaro%20team!%20I%27m%20looking%20to%20plan%20a%20trip.%20Can%20you%20help%20me%20find%20the%20best%20itinerary%3F`}
+        href={waUrl}
         target="_blank"
         rel="noopener noreferrer"
         id="floating-whatsapp-btn"
         className="whatsapp-pulse"
         title="Chat on WhatsApp"
         style={{
-          width: '58px',
-          height: '58px',
+          width: '56px',
+          height: '56px',
           borderRadius: '50%',
           background: '#25D366',
           color: '#ffffff',
@@ -76,7 +80,7 @@ export default function FloatingWhatsApp() {
         onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.08)'}
         onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
       >
-        <MessageCircle size={30} />
+        <MessageCircle size={28} />
       </a>
     </div>
   );

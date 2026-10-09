@@ -248,6 +248,12 @@ h1, h2, h3, h4, h5, h6 {
   .desktop-nav {
     display: none !important;
   }
+  .desktop-only {
+    display: none !important;
+  }
+  .mobile-only {
+    display: flex !important;
+  }
   .search-bar-wrap {
     flex-direction: column !important;
     border-radius: var(--radius-lg) !important;
@@ -262,8 +268,42 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+@media (min-width: 769px) {
+  .mobile-only {
+    display: none !important;
+  }
+}
+
 @keyframes slideLeft {
   from { transform: translateX(100%); }
   to { transform: translateX(0); }
 }
 
+
+/* Shared form controls for customer-facing community forms */
+#happy-travellers input,
+#happy-travellers textarea,
+#happy-travellers select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 13px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font: inherit;
+  outline: none;
+}
+
+#happy-travellers input:focus,
+#happy-travellers textarea:focus,
+#happy-travellers select:focus {
+  border-color: var(--coral-primary);
+  box-shadow: 0 0 0 3px rgba(255, 56, 92, 0.08);
+}
+
+@media (max-width: 680px) {
+  #happy-travellers form > div[style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+  }
+}

@@ -1,12 +1,15 @@
-import React from 'react';
-import { Heart, Star, Clock, Users, ArrowRight, MessageCircle, Sparkles } from 'lucide-react';
+import React, { useState } from 'react';
+import { Heart, Clock, ArrowRight, MessageCircle, Sparkles, Scale } from 'lucide-react';
+import { getTourImage } from '../utils/imageFallback';
 
 export default function TourCard({
   tour,
   isSaved,
   onToggleSave,
   onOpenDetails,
-  onQuickWhatsApp
+  onQuickWhatsApp,
+  isCompared = false,
+  onToggleCompare
 }) {
   const {
     tour_id,
@@ -22,6 +25,9 @@ export default function TourCard({
     tour_type,
     is_trending
   } = tour;
+
+  const resolvedImage = getTourImage(image, destination);
+  const [imgSrc, setImgSrc] = useState(resolvedImage);
 
   return (
     <div
@@ -60,10 +66,11 @@ export default function TourCard({
         background: '#1f2937'
       }}>
         <img
-          src={image}
+          src={imgSrc}
           alt={tour_name}
           className="tour-card-img"
           loading="lazy"
+          onError={() => setImgSrc(getTourImage(null, destination))}
           style={{
             width: '100%',
             height: '100%',
@@ -111,35 +118,67 @@ export default function TourCard({
           )}
         </div>
 
-        {/* Wishlist Heart Button */}
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onToggleSave(tour);
-          }}
-          id={`wishlist-btn-${tour_id}`}
-          title={isSaved ? "Remove from wishlist" : "Save to squad wishlist"}
-          style={{
-            position: 'absolute',
-            top: '12px',
-            right: '12px',
-            width: '34px',
-            height: '34px',
-            borderRadius: '50%',
-            background: 'rgba(10, 14, 26, 0.65)',
-            backdropFilter: 'blur(8px)',
-            border: 'none',
-            color: isSaved ? 'var(--coral-primary)' : '#fff',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            zIndex: 2,
-            transition: 'var(--transition)'
-          }}
-        >
-          <Heart size={18} fill={isSaved ? "var(--coral-primary)" : "none"} />
-        </button>
+        {/* Action icons: Compare & Wishlist */}
+        <div style={{
+          position: 'absolute',
+          top: '12px',
+          right: '12px',
+          display: 'flex',
+          gap: '6px',
+          zIndex: 2
+        }}>
+          {onToggleCompare && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onToggleCompare(tour);
+              }}
+              id={`compare-btn-${tour_id}`}
+              title={isCompared ? "Remove from comparison" : "Compare this tour"}
+              style={{
+                width: '34px',
+                height: '34px',
+                borderRadius: '50%',
+                background: isCompared ? 'var(--coral-primary)' : 'rgba(10, 14, 26, 0.65)',
+                backdropFilter: 'blur(8px)',
+                border: 'none',
+                color: '#fff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                transition: 'var(--transition)'
+              }}
+            >
+              <Scale size={16} />
+            </button>
+          )}
+
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleSave(tour);
+            }}
+            id={`wishlist-btn-${tour_id}`}
+            title={isSaved ? "Remove from wishlist" : "Save to squad wishlist"}
+            style={{
+              width: '34px',
+              height: '34px',
+              borderRadius: '50%',
+              background: 'rgba(10, 14, 26, 0.65)',
+              backdropFilter: 'blur(8px)',
+              border: 'none',
+              color: isSaved ? 'var(--coral-primary)' : '#fff',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              transition: 'var(--transition)'
+            }}
+          >
+            <Heart size={18} fill={isSaved ? "var(--coral-primary)" : "none"} />
+          </button>
+        </div>
 
         {/* Trending Chip */}
         {is_trending && (
@@ -181,11 +220,9 @@ export default function TourCard({
           }}>
             {destination} • {tour_type}
           </span>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.82rem', fontWeight: 700 }}>
-            <Star size={14} fill="var(--gold-star)" color="var(--gold-star)" />
-            <span>{rating}</span>
-            <span style={{ color: 'var(--text-muted)', fontSize: '0.75rem' }}>({review_count})</span>
-          </div>
+          <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+            {group_size || 'Custom Group'}
+          </span>
         </div>
 
         {/* Tour Name */}
@@ -253,7 +290,7 @@ export default function TourCard({
           <div style={{ display: 'flex', gap: '6px' }}>
             <button
               onClick={() => onQuickWhatsApp(tour)}
-              title="Instant WhatsApp Quote"
+              title="Instant WhatsApp Enquiry"
               id={`wa-quote-btn-${tour_id}`}
               style={{
                 background: 'rgba(37, 211, 102, 0.15)',

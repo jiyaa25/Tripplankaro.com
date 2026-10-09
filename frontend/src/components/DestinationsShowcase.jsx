@@ -1,7 +1,12 @@
 import React from 'react';
-import { MapPin, ArrowUpRight } from 'lucide-react';
+import { MapPin, ArrowUpRight, BookOpen, Sparkles } from 'lucide-react';
 
-export default function DestinationsShowcase({ destinations, onSelectDestination, selectedDestination }) {
+export default function DestinationsShowcase({
+  destinations,
+  onSelectDestination,
+  selectedDestination,
+  onExploreDestination
+}) {
   if (!destinations || destinations.length === 0) return null;
 
   return (
@@ -34,7 +39,7 @@ export default function DestinationsShowcase({ destinations, onSelectDestination
               <span>Explore By Hub</span>
             </div>
             <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.4rem)' }}>
-              Trending <span className="gradient-text">Destinations</span>
+              Popular <span className="gradient-text">Destinations</span>
             </h2>
           </div>
           {selectedDestination && selectedDestination !== 'all' && (
@@ -51,7 +56,7 @@ export default function DestinationsShowcase({ destinations, onSelectDestination
         {/* Destination Grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
           gap: '16px'
         }}>
           {destinations.map((d, i) => {
@@ -61,18 +66,17 @@ export default function DestinationsShowcase({ destinations, onSelectDestination
 
             return (
               <div
-                key={i}
+                key={d.destination_id || i}
                 id={`destination-card-${i}`}
-                onClick={() => onSelectDestination(d.name)}
                 style={{
                   position: 'relative',
-                  height: '240px',
+                  height: '250px',
                   borderRadius: 'var(--radius-md)',
                   overflow: 'hidden',
-                  cursor: 'pointer',
                   border: isSelected ? '2px solid var(--coral-primary)' : '1px solid var(--border-color)',
                   boxShadow: isSelected ? 'var(--shadow-coral)' : 'var(--shadow-sm)',
-                  transition: 'var(--transition)'
+                  transition: 'var(--transition)',
+                  cursor: 'pointer'
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'translateY(-4px)';
@@ -83,6 +87,13 @@ export default function DestinationsShowcase({ destinations, onSelectDestination
                   e.currentTarget.style.transform = 'translateY(0)';
                   const img = e.currentTarget.querySelector('img');
                   if (img) img.style.transform = 'scale(1)';
+                }}
+                onClick={() => {
+                  if (onExploreDestination) {
+                    onExploreDestination(d);
+                  } else {
+                    onSelectDestination(d.name);
+                  }
                 }}
               >
                 {/* Image */}
@@ -102,26 +113,29 @@ export default function DestinationsShowcase({ destinations, onSelectDestination
                 <div style={{
                   position: 'absolute',
                   inset: 0,
-                  background: 'linear-gradient(to top, rgba(10, 14, 26, 0.92) 0%, rgba(10, 14, 26, 0.2) 60%, transparent 100%)'
+                  background: 'linear-gradient(to top, rgba(10, 14, 26, 0.92) 0%, rgba(10, 14, 26, 0.3) 60%, transparent 100%)'
                 }} />
 
-                {/* Badge for Type */}
+                {/* Badge for Region / Country */}
                 <div style={{
                   position: 'absolute',
                   top: '12px',
-                  left: '12px'
+                  left: '12px',
+                  display: 'flex',
+                  gap: '6px'
                 }}>
                   <span style={{
                     fontSize: '0.7rem',
                     fontWeight: 800,
                     padding: '3px 8px',
                     borderRadius: 'var(--radius-full)',
-                    background: d.tour_type === 'International' ? 'rgba(139,92,246,0.8)' : 'rgba(16,185,129,0.8)',
+                    background: 'rgba(10, 14, 26, 0.75)',
+                    backdropFilter: 'blur(6px)',
                     color: '#fff',
                     textTransform: 'uppercase',
                     letterSpacing: '0.04em'
                   }}>
-                    {d.tour_type}
+                    {d.region || d.country}
                   </span>
                 </div>
 
@@ -137,32 +151,38 @@ export default function DestinationsShowcase({ destinations, onSelectDestination
                 }}>
                   <div>
                     <h3 style={{
-                      fontSize: '1.2rem',
+                      fontSize: '1.25rem',
                       fontWeight: 800,
                       color: '#ffffff',
-                      marginBottom: '2px'
+                      marginBottom: '2px',
+                      lineHeight: 1.2
                     }}>
                       {d.name}
                     </h3>
                     <p style={{
-                      fontSize: '0.8rem',
-                      color: 'rgba(255,255,255,0.8)',
-                      fontWeight: 600
+                      fontSize: '0.78rem',
+                      color: 'rgba(255,255,255,0.85)',
+                      fontWeight: 600,
+                      margin: 0
                     }}>
-                      {d.tour_count} Curated Tours
+                      {d.short_description?.slice(0, 48)}...
                     </p>
                   </div>
-                  <div style={{
-                    width: '32px',
-                    height: '32px',
-                    borderRadius: '50%',
-                    background: 'rgba(255,255,255,0.2)',
-                    backdropFilter: 'blur(4px)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#fff'
-                  }}>
+                  <div
+                    title="Explore Hub Guide"
+                    style={{
+                      width: '34px',
+                      height: '34px',
+                      borderRadius: '50%',
+                      background: 'rgba(255,56,92,0.85)',
+                      backdropFilter: 'blur(4px)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#fff',
+                      flexShrink: 0
+                    }}
+                  >
                     <ArrowUpRight size={16} />
                   </div>
                 </div>

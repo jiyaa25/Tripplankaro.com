@@ -1,54 +1,72 @@
 import React, { useState, useEffect } from 'react';
-import { Calculator, Users, Copy, Check, Sparkles, MessageCircle, ArrowRight } from 'lucide-react';
+import { Calculator, Copy, Check, MessageCircle } from 'lucide-react';
+import { generateSquadSplitterWhatsAppMessage, openWhatsApp } from '../utils/whatsapp';
 
 export default function SquadBillSplitter({ initialTour }) {
   const [squadSize, setSquadSize] = useState(4);
-  const [tourName, setTourName] = useState(initialTour ? initialTour.tour_name : 'Goa Beach Bliss');
+  const [tripName, setTripName] = useState(initialTour ? initialTour.tour_name : 'Goa Beach Weekend');
   const [packageCost, setPackageCost] = useState(
     initialTour?.pricing?.discounted_price_num || 18500
   );
-  const [travelCost, setTravelCost] = useState(4000);
-  const [foodCost, setFoodCost] = useState(3500);
-  const [miscCost, setMiscCost] = useState(2000);
+  const [travelCost, setTravelCost] = useState(3500);
+  const [foodCost, setFoodCost] = useState(3000);
+  const [activitiesCost, setActivitiesCost] = useState(2000);
   const [copied, setCopied] = useState(false);
+
+  // Unequal split toggle & custom contributions
+  const [enableUnequal, setEnableUnequal] = useState(false);
+  const [customMembers, setCustomMembers] = useState([
+    { name: 'Member 1 (Organizer)', amount: '' },
+    { name: 'Member 2', amount: '' },
+    { name: 'Member 3', amount: '' },
+    { name: 'Member 4', amount: '' }
+  ]);
 
   useEffect(() => {
     if (initialTour) {
-      setTourName(initialTour.tour_name);
+      setTripName(initialTour.tour_name);
       setPackageCost(initialTour.pricing?.discounted_price_num || 18500);
     }
   }, [initialTour]);
 
-  const perPersonTotal = packageCost + travelCost + foodCost + miscCost;
-  const grandTotal = perPersonTotal * squadSize;
+  // Adjust custom member count when squad size changes
+  useEffect(() => {
+    setCustomMembers(prev => {
+      const arr = [...prev];
+      while (arr.length < squadSize) {
+        arr.push({ name: `Member ${arr.length + 1}`, amount: '' });
+      }
+      return arr.slice(0, squadSize);
+    });
+  }, [squadSize]);
 
-  const generateWhatsAppMessage = () => {
-    return `🔥 *TRIPPLANKARO SQUAD TRIP ESTIMATE* ✈️
-━━━━━━━━━━━━━━━━━━
-📍 *Trip:* ${tourName}
-👥 *Squad Size:* ${squadSize} Friends
+  const perPersonBase = packageCost + travelCost + foodCost + activitiesCost;
+  const grandTotal = perPersonBase * squadSize;
 
-💰 *Per Person Breakdown:*
-• Base Stay & Transfers: ₹${packageCost.toLocaleString()}
-• Estimated Flights/Train: ₹${travelCost.toLocaleString()}
-• Food & Drinks Fund: ₹${foodCost.toLocaleString()}
-• Activities & Nightlife: ₹${miscCost.toLocaleString()}
-━━━━━━━━━━━━━━━━━━
-👉 *Total Per Person:* ₹${perPersonTotal.toLocaleString()}
-🎉 *Total Squad Budget:* ₹${grandTotal.toLocaleString()}
-
-Let's lock this in on Tripplankaro! "We plan, you enjoy" ✨`;
-  };
+  // Custom calculation
+  const totalContributed = customMembers.reduce((sum, m) => sum + (Number(m.amount) || 0), 0);
+  const difference = grandTotal - totalContributed;
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(generateWhatsAppMessage());
+    const text = generateSquadSplitterWhatsAppMessage({
+      tripName,
+      totalCost: grandTotal,
+      memberCount: squadSize,
+      perPersonCost: perPersonBase
+    });
+    navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   };
 
-  const handleSendToWhatsApp = () => {
-    const text = encodeURIComponent(generateWhatsAppMessage());
-    window.open(`https://wa.me/?text=${text}`, '_blank');
+  const handleWhatsAppShare = () => {
+    const text = generateSquadSplitterWhatsAppMessage({
+      tripName,
+      totalCost: grandTotal,
+      memberCount: squadSize,
+      perPersonCost: perPersonBase
+    });
+    openWhatsApp(text);
   };
 
   return (
@@ -77,7 +95,7 @@ Let's lock this in on Tripplankaro! "We plan, you enjoy" ✨`;
             Split The Bill <span className="gradient-text">Like Adults</span> 💸
           </h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
-            Stop arguing in the group chat. Calculate exact per-head costs and drop the receipt directly into your WhatsApp squad group!
+            Calculate exact per-head estimates or unequal contributions, then drop the brief straight into your group chat.
           </p>
         </div>
 
@@ -91,290 +109,249 @@ Let's lock this in on Tripplankaro! "We plan, you enjoy" ✨`;
             borderRadius: 'var(--radius-lg)',
             padding: '28px',
             boxShadow: 'var(--shadow-md)',
-            border: '1px solid var(--border-color)'
+            border: '1px solid var(--border-color)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '16px'
           }}>
-            <h3 style={{ fontSize: '1.2rem', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <h3 style={{ fontSize: '1.15rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
               <span>⚙️ Adjust Squad Parameters</span>
             </h3>
 
-            {/* Trip Name */}
-            <div style={{ marginBottom: '16px' }}>
-              <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 700, marginBottom: '6px' }}>
-                Selected Trip / Destination
+            {/* Trip Name & Squad Size */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: '12px' }}>
+              <div>
+                <label style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-muted)', display: 'block', marginBottom: '4px' }}>
+                  Trip Title
+                </label>
+                <input
+                  type="text"
+                  value={tripName}
+                  onChange={e => setTripName(e.target.value)}
+                  placeholder="e.g. Goa Grad Trip"
+                  style={{ width: '100%', padding: '9px 12px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)', background: 'var(--bg-secondary)', color: 'var(--text-primary)', fontSize: '0.88rem' }}
+                />
+              </div>
+
+              <div>
+                <label style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-muted)', display: 'block', marginBottom: '4px' }}>
+                  Squad Size ({squadSize} pax)
+                </label>
+                <input
+                  type="number"
+                  min="2"
+                  max="20"
+                  value={squadSize}
+                  onChange={e => setSquadSize(Math.max(2, parseInt(e.target.value, 10) || 2))}
+                  style={{ width: '100%', padding: '9px 12px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)', background: 'var(--bg-secondary)', color: 'var(--text-primary)', fontSize: '0.88rem' }}
+                />
+              </div>
+            </div>
+
+            {/* Expense Inputs */}
+            <div>
+              <label style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-muted)', display: 'block', marginBottom: '4px' }}>
+                Base Package / Stays (Per Person): ₹{packageCost.toLocaleString('en-IN')}
               </label>
               <input
-                type="text"
-                id="splitter-trip-name"
-                value={tourName}
-                onChange={(e) => setTourName(e.target.value)}
-                style={{
-                  width: '100%',
-                  padding: '10px 14px',
-                  borderRadius: 'var(--radius-sm)',
-                  background: 'rgba(255,255,255,0.06)',
-                  border: '1px solid var(--border-color)',
-                  color: 'var(--text-primary)',
-                  fontSize: '0.9rem',
-                  fontWeight: 600,
-                  outline: 'none'
-                }}
-              />
-            </div>
-
-            {/* Squad Size Slider */}
-            <div style={{ marginBottom: '20px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
-                <span style={{ fontSize: '0.82rem', fontWeight: 700 }}>
-                  Squad Members
-                </span>
-                <span style={{
-                  color: 'var(--coral-primary)',
-                  fontWeight: 800,
-                  fontSize: '0.9rem'
-                }}>
-                  {squadSize} Friends
-                </span>
-              </div>
-              <input
                 type="range"
-                id="splitter-squad-size"
-                min="1"
-                max="16"
-                value={squadSize}
-                onChange={(e) => setSquadSize(parseInt(e.target.value))}
-                style={{ width: '100%', accentColor: 'var(--coral-primary)', cursor: 'pointer' }}
-              />
-            </div>
-
-            {/* Package Price */}
-            <div style={{ marginBottom: '16px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
-                <label style={{ fontSize: '0.82rem', fontWeight: 700 }}>
-                  Tripplankaro Package (per head)
-                </label>
-                <span style={{ color: 'var(--text-secondary)', fontSize: '0.82rem', fontWeight: 700 }}>
-                  ₹{packageCost.toLocaleString()}
-                </span>
-              </div>
-              <input
-                type="number"
-                id="splitter-pkg-cost"
+                min="5000"
+                max="80000"
                 step="500"
                 value={packageCost}
-                onChange={(e) => setPackageCost(parseInt(e.target.value) || 0)}
-                style={{
-                  width: '100%',
-                  padding: '10px 14px',
-                  borderRadius: 'var(--radius-sm)',
-                  background: 'rgba(255,255,255,0.06)',
-                  border: '1px solid var(--border-color)',
-                  color: 'var(--text-primary)',
-                  fontSize: '0.9rem',
-                  outline: 'none'
-                }}
+                onChange={e => setPackageCost(Number(e.target.value))}
+                style={{ width: '100%', accentColor: 'var(--coral-primary)' }}
               />
             </div>
 
-            {/* Travel / Flights */}
-            <div style={{ marginBottom: '16px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
-                <label style={{ fontSize: '0.82rem', fontWeight: 700 }}>
-                  Flights / Train Fund (per head)
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+              <div>
+                <label style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-muted)', display: 'block', marginBottom: '4px' }}>
+                  Transport / Air (Per Person)
                 </label>
-                <span style={{ color: 'var(--text-secondary)', fontSize: '0.82rem', fontWeight: 700 }}>
-                  ₹{travelCost.toLocaleString()}
-                </span>
+                <input
+                  type="number"
+                  value={travelCost}
+                  onChange={e => setTravelCost(Number(e.target.value) || 0)}
+                  style={{ width: '100%', padding: '8px 10px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)', background: 'var(--bg-secondary)', color: 'var(--text-primary)', fontSize: '0.85rem' }}
+                />
               </div>
-              <input
-                type="number"
-                step="500"
-                value={travelCost}
-                onChange={(e) => setTravelCost(parseInt(e.target.value) || 0)}
-                style={{
-                  width: '100%',
-                  padding: '10px 14px',
-                  borderRadius: 'var(--radius-sm)',
-                  background: 'rgba(255,255,255,0.06)',
-                  border: '1px solid var(--border-color)',
-                  color: 'var(--text-primary)',
-                  fontSize: '0.9rem',
-                  outline: 'none'
-                }}
-              />
-            </div>
 
-            {/* Food & Drinks */}
-            <div style={{ marginBottom: '16px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
-                <label style={{ fontSize: '0.82rem', fontWeight: 700 }}>
-                  Food, Cafes & Drinks Fund (per head)
+              <div>
+                <label style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-muted)', display: 'block', marginBottom: '4px' }}>
+                  Food & Drinks Fund (Per Person)
                 </label>
-                <span style={{ color: 'var(--text-secondary)', fontSize: '0.82rem', fontWeight: 700 }}>
-                  ₹{foodCost.toLocaleString()}
-                </span>
+                <input
+                  type="number"
+                  value={foodCost}
+                  onChange={e => setFoodCost(Number(e.target.value) || 0)}
+                  style={{ width: '100%', padding: '8px 10px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)', background: 'var(--bg-secondary)', color: 'var(--text-primary)', fontSize: '0.85rem' }}
+                />
               </div>
-              <input
-                type="number"
-                step="500"
-                value={foodCost}
-                onChange={(e) => setFoodCost(parseInt(e.target.value) || 0)}
-                style={{
-                  width: '100%',
-                  padding: '10px 14px',
-                  borderRadius: 'var(--radius-sm)',
-                  background: 'rgba(255,255,255,0.06)',
-                  border: '1px solid var(--border-color)',
-                  color: 'var(--text-primary)',
-                  fontSize: '0.9rem',
-                  outline: 'none'
-                }}
-              />
             </div>
 
-            {/* Misc / Activities */}
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
-                <label style={{ fontSize: '0.82rem', fontWeight: 700 }}>
-                  Nightlife, Shopping & Adventure
-                </label>
-                <span style={{ color: 'var(--text-secondary)', fontSize: '0.82rem', fontWeight: 700 }}>
-                  ₹{miscCost.toLocaleString()}
-                </span>
-              </div>
+              <label style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-muted)', display: 'block', marginBottom: '4px' }}>
+                Activities & Sightseeing (Per Person)
+              </label>
               <input
                 type="number"
-                step="500"
-                value={miscCost}
-                onChange={(e) => setMiscCost(parseInt(e.target.value) || 0)}
-                style={{
-                  width: '100%',
-                  padding: '10px 14px',
-                  borderRadius: 'var(--radius-sm)',
-                  background: 'rgba(255,255,255,0.06)',
-                  border: '1px solid var(--border-color)',
-                  color: 'var(--text-primary)',
-                  fontSize: '0.9rem',
-                  outline: 'none'
-                }}
+                value={activitiesCost}
+                onChange={e => setActivitiesCost(Number(e.target.value) || 0)}
+                style={{ width: '100%', padding: '8px 10px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)', background: 'var(--bg-secondary)', color: 'var(--text-primary)', fontSize: '0.85rem' }}
               />
+            </div>
+
+            {/* Unequal Contributions Toggle */}
+            <div style={{
+              background: 'rgba(255,255,255,0.03)',
+              borderRadius: 'var(--radius-md)',
+              padding: '12px 14px',
+              border: '1px solid var(--border-color)'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: '0.84rem', fontWeight: 700 }}>
+                  Unequal Squad Contributions?
+                </span>
+                <input
+                  type="checkbox"
+                  checked={enableUnequal}
+                  onChange={e => setEnableUnequal(e.target.checked)}
+                  style={{ width: '16px', height: '16px', accentColor: 'var(--coral-primary)', cursor: 'pointer' }}
+                />
+              </div>
+
+              {enableUnequal && (
+                <div style={{ marginTop: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                    Specify amounts paid or budgeted by each individual:
+                  </div>
+                  {customMembers.map((m, idx) => (
+                    <div key={idx} style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '8px' }}>
+                      <input
+                        type="text"
+                        value={m.name}
+                        onChange={e => {
+                          const updated = [...customMembers];
+                          updated[idx].name = e.target.value;
+                          setCustomMembers(updated);
+                        }}
+                        style={{ padding: '6px 8px', borderRadius: '4px', border: '1px solid var(--border-color)', background: 'var(--bg-secondary)', color: 'var(--text-primary)', fontSize: '0.78rem' }}
+                      />
+                      <input
+                        type="number"
+                        placeholder={`Share (₹${perPersonBase})`}
+                        value={m.amount}
+                        onChange={e => {
+                          const updated = [...customMembers];
+                          updated[idx].amount = e.target.value;
+                          setCustomMembers(updated);
+                        }}
+                        style={{ padding: '6px 8px', borderRadius: '4px', border: '1px solid var(--border-color)', background: 'var(--bg-secondary)', color: 'var(--text-primary)', fontSize: '0.78rem' }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 
-          {/* Results Receipt Card */}
+          {/* Receipt View */}
           <div className="glass" style={{
             borderRadius: 'var(--radius-lg)',
             padding: '28px',
-            boxShadow: 'var(--shadow-lg)',
-            border: '1px solid var(--border-hover)',
+            border: '1px solid var(--border-color)',
             display: 'flex',
-            flexDirection: 'column'
+            flexDirection: 'column',
+            justifyContent: 'space-between'
           }}>
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              marginBottom: '16px'
-            }}>
-              <span style={{
-                fontSize: '0.75rem',
-                fontWeight: 800,
-                color: 'var(--coral-primary)',
-                letterSpacing: '0.06em',
-                textTransform: 'uppercase'
-              }}>
-                Receipt Breakdown
-              </span>
-              <span style={{
-                fontSize: '0.72rem',
-                background: 'rgba(16, 185, 129, 0.15)',
-                color: '#10b981',
-                padding: '3px 8px',
-                borderRadius: 'var(--radius-full)',
-                fontWeight: 700
-              }}>
-                100% Transparent
-              </span>
+            <div>
+              <div style={{ borderBottom: '2px dashed var(--border-color)', paddingBottom: '16px', marginBottom: '16px' }}>
+                <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--coral-primary)', fontWeight: 800 }}>
+                  SQUAD ESTIMATE RECEIPT 🧾
+                </div>
+                <h4 style={{ fontSize: '1.2rem', fontWeight: 800, marginTop: '4px' }}>
+                  {tripName}
+                </h4>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                  {squadSize} members participating
+                </div>
+              </div>
+
+              {/* Financial Summary */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.88rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: 'var(--text-secondary)' }}>Base Package:</span>
+                  <span>₹{packageCost.toLocaleString('en-IN')}/head</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: 'var(--text-secondary)' }}>Travel / Fuel:</span>
+                  <span>₹{travelCost.toLocaleString('en-IN')}/head</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: 'var(--text-secondary)' }}>Food & Drinks:</span>
+                  <span>₹{foodCost.toLocaleString('en-IN')}/head</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: 'var(--text-secondary)' }}>Activities & Sights:</span>
+                  <span>₹{activitiesCost.toLocaleString('en-IN')}/head</span>
+                </div>
+
+                <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontWeight: 800 }}>Per Person Share:</span>
+                  <span style={{ fontSize: '1.2rem', fontWeight: 900, color: '#10b981' }}>
+                    ₹{perPersonBase.toLocaleString('en-IN')}
+                  </span>
+                </div>
+
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontWeight: 800 }}>Total Squad Budget:</span>
+                  <span style={{ fontSize: '1.4rem', fontWeight: 900, color: 'var(--coral-primary)' }}>
+                    ₹{grandTotal.toLocaleString('en-IN')}
+                  </span>
+                </div>
+
+                {enableUnequal && (
+                  <div style={{
+                    marginTop: '10px',
+                    padding: '10px',
+                    borderRadius: 'var(--radius-sm)',
+                    background: difference === 0 ? 'rgba(16,185,129,0.1)' : 'rgba(245,158,11,0.1)',
+                    border: `1px solid ${difference === 0 ? '#10b981' : '#f59e0b'}`,
+                    fontSize: '0.8rem'
+                  }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <span>Allocated:</span>
+                      <strong>₹{totalContributed.toLocaleString('en-IN')}</strong>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '4px' }}>
+                      <span>Difference / Remaining:</span>
+                      <strong style={{ color: difference === 0 ? '#10b981' : '#f59e0b' }}>
+                        {difference === 0 ? 'Balanced perfectly! ✨' : `₹${difference.toLocaleString('en-IN')}`}
+                      </strong>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
 
-            <div style={{
-              padding: '16px',
-              background: 'rgba(255, 255, 255, 0.04)',
-              borderRadius: 'var(--radius-md)',
-              marginBottom: '20px'
-            }}>
-              <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Estimated Cost</div>
-              <div style={{
-                fontSize: '2.4rem',
-                fontWeight: 900,
-                fontFamily: 'var(--font-heading)',
-                color: 'var(--coral-primary)',
-                lineHeight: 1.1
-              }}>
-                ₹{perPersonTotal.toLocaleString()}
-                <span style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--text-secondary)' }}> / person</span>
-              </div>
-              <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
-                Total Squad Pool ({squadSize} pax): <strong>₹{grandTotal.toLocaleString()}</strong>
-              </div>
-            </div>
-
-            {/* Line items */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.88rem', marginBottom: '24px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: 'var(--text-secondary)' }}>Stays, Transfers & Sightseeing:</span>
-                <span style={{ fontWeight: 700 }}>₹{packageCost.toLocaleString()}</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: 'var(--text-secondary)' }}>Flights / Rail Travel:</span>
-                <span style={{ fontWeight: 700 }}>₹{travelCost.toLocaleString()}</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: 'var(--text-secondary)' }}>Cafes, Meals & Shacks:</span>
-                <span style={{ fontWeight: 700 }}>₹{foodCost.toLocaleString()}</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ color: 'var(--text-secondary)' }}>Activities & Nightlife Fund:</span>
-                <span style={{ fontWeight: 700 }}>₹{miscCost.toLocaleString()}</span>
-              </div>
-            </div>
-
-            {/* Share to WhatsApp */}
-            <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            {/* CTAs */}
+            <div style={{ marginTop: '24px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <button
-                id="send-wa-squad-btn"
-                onClick={handleSendToWhatsApp}
-                style={{
-                  background: '#25d366',
-                  color: '#fff',
-                  border: 'none',
-                  borderRadius: 'var(--radius-full)',
-                  padding: '12px 20px',
-                  fontWeight: 700,
-                  fontSize: '0.92rem',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '8px',
-                  boxShadow: '0 4px 15px rgba(37, 211, 102, 0.3)',
-                  transition: 'var(--transition)'
-                }}
+                onClick={handleWhatsAppShare}
+                className="gradient-btn"
+                style={{ width: '100%', padding: '12px', fontSize: '0.9rem' }}
               >
-                <MessageCircle size={18} />
-                <span>Send to WhatsApp Group Chat</span>
+                <MessageCircle size={17} />
+                <span>Share with Squad on WhatsApp</span>
               </button>
-
               <button
-                id="copy-squad-breakdown-btn"
                 onClick={handleCopy}
                 className="secondary-btn"
-                style={{
-                  padding: '10px 18px',
-                  fontSize: '0.88rem'
-                }}
+                style={{ width: '100%', padding: '10px', fontSize: '0.85rem' }}
               >
                 {copied ? <Check size={16} color="#10b981" /> : <Copy size={16} />}
-                <span>{copied ? 'Copied to Clipboard!' : 'Copy Formatted Text'}</span>
+                <span>{copied ? 'Copied Receipt to Clipboard!' : 'Copy Receipt Text'}</span>
               </button>
             </div>
           </div>

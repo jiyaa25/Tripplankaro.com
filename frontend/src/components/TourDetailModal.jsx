@@ -14,18 +14,22 @@ import {
   Share2,
   Heart,
   ChevronRight,
-  ShieldCheck
+  Scale,
+  Sparkles
 } from 'lucide-react';
+import { generateTourWhatsAppMessage, openWhatsApp } from '../utils/whatsapp';
+import { getTourImage, getGalleryImages } from '../utils/imageFallback';
 
 export default function TourDetailModal({
   tour,
   onClose,
   onOpenSplitter,
+  onOpenCalculator,
   isSaved,
-  onToggleSave
+  onToggleSave,
+  isCompared,
+  onToggleCompare
 }) {
-  if (!tour) return null;
-
   const [activeTab, setActiveTab] = useState('itinerary'); // 'itinerary', 'inclusions', 'photos', 'book'
   const [selectedDayIndex, setSelectedDayIndex] = useState(0);
   const [inquiryForm, setInquiryForm] = useState({
@@ -33,11 +37,15 @@ export default function TourDetailModal({
     phone: '',
     email: '',
     squad_size: 4,
+    departure_city: '',
     travel_date: '',
+    meal_preference: '',
     notes: ''
   });
   const [submitting, setSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  if (!tour) return null;
 
   const {
     tour_id,
@@ -55,38 +63,38 @@ export default function TourDetailModal({
     itinerary,
     vibes,
     photo_spots,
-    gallery_images
+    gallery_images,
+    image
   } = tour;
 
-  const handleInquirySubmit = async (e) => {
+  // Resolve images — replaces broken thefoxtraveller.com URLs with reliable Unsplash fallbacks
+  const resolvedHeroImage = getTourImage(image, destination);
+  const resolvedGallery = getGalleryImages(gallery_images, destination, image);
+
+  const handleInquirySubmit = (e) => {
     e.preventDefault();
-    setSubmitting(true);
-    try {
-      const res = await fetch('/api/inquiries', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          tour_id,
-          tour_name,
-          ...inquiryForm
-        })
-      });
-      const data = await res.json();
-      if (data.success) {
-        setSubmitSuccess(true);
-      }
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setSubmitting(false);
-    }
+    setSubmitSuccess(true);
+    const msg = `Hi Tripplankaro! 👋
+I want to enquire about planning this trip:
+*${tour_name}* (ID: ${tour_id}, ${duration_short})
+Price: ${pricing?.discounted_price || 'On Request'}
+
+Details:
+• Name: ${inquiryForm.name}
+• Phone: ${inquiryForm.phone}
+• Travelers: ${inquiryForm.squad_size} persons
+• Preferred Date: ${inquiryForm.travel_date || 'Flexible'}
+• Departure City: ${inquiryForm.departure_city || 'Not specified'}
+• Meal Preference: ${inquiryForm.meal_preference || 'None'}
+• Notes: ${inquiryForm.notes || 'None'}
+
+Please check availability and connect with me!`;
+    openWhatsApp(msg);
   };
 
   const handleWhatsAppDirect = () => {
-    const text = encodeURIComponent(
-      `Hey Tripplankaro team! ✈️ I'm checking out *${tour_name}* (ID: ${tour_id}, ${duration_short}).\n\nSquad Size: ${inquiryForm.squad_size} people\nTravel Date: ${inquiryForm.travel_date || 'Flexible'}\nCan you share availability and squad discount details?`
-    );
-    window.open(`https://wa.me/919016272544?text=${text}`, '_blank');
+    const msg = generateTourWhatsAppMessage(tour);
+    openWhatsApp(msg);
   };
 
   const handleShare = () => {
@@ -162,6 +170,26 @@ export default function TourDetailModal({
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            {onToggleCompare && (
+              <button
+                onClick={() => onToggleCompare(tour)}
+                title={isCompared ? "Remove from comparison" : "Compare this tour"}
+                style={{
+                  background: isCompared ? 'var(--coral-primary)' : 'rgba(255, 255, 255, 0.08)',
+                  border: '1px solid var(--border-color)',
+                  width: '36px',
+                  height: '36px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#fff',
+                  cursor: 'pointer'
+                }}
+              >
+                <Scale size={17} />
+              </button>
+            )}
             <button
               onClick={() => onToggleSave(tour)}
               title={isSaved ? "Saved in wishlist" : "Save trip"}
@@ -245,16 +273,15 @@ export default function TourDetailModal({
               }}>
                 <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                   <Clock size={16} color="var(--coral-primary)" />
-                  {duration}
+                  {duration_short || duration?.text || 'Custom Duration'}
                 </span>
                 <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                   <Users size={16} color="var(--coral-primary)" />
-                  {group_size}
+                  {group_size || 'Custom Group'}
                 </span>
-                <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                  <Star size={16} fill="var(--gold-star)" color="var(--gold-star)" />
-                  <strong style={{ color: 'var(--text-primary)' }}>{rating}</strong>
-                  <span>({review_count} reviews)</span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: 'var(--coral-primary)', fontWeight: 700 }}>
+                  <Sparkles size={15} />
+                  <span>Curated Tour</span>
                 </span>
               </div>
             </div>
@@ -294,7 +321,7 @@ export default function TourDetailModal({
             gap: '10px',
             marginBottom: '24px'
           }}>
-            {gallery_images?.slice(0, 4).map((imgUrl, idx) => (
+            {resolvedGallery.slice(0, 4).map((imgUrl, idx) => (
               <div key={idx} style={{
                 height: '130px',
                 borderRadius: 'var(--radius-sm)',
@@ -305,6 +332,7 @@ export default function TourDetailModal({
                   src={imgUrl}
                   alt={`Tour snapshot ${idx + 1}`}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  onError={(e) => { e.currentTarget.src = resolvedHeroImage; }}
                 />
               </div>
             ))}
@@ -440,9 +468,10 @@ export default function TourDetailModal({
                       background: '#1e293b'
                     }}>
                       <img
-                        src={activeDay.image}
+                        src={getTourImage(activeDay.image, destination)}
                         alt={`Day ${activeDay.day} ${activeDay.title}`}
                         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        onError={(e) => { e.currentTarget.src = resolvedHeroImage; }}
                       />
                     </div>
                   )}
@@ -691,6 +720,38 @@ export default function TourDetailModal({
                     </div>
                   </div>
 
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, marginBottom: '6px' }}>
+                        Departure City
+                      </label>
+                      <input
+                        type="text"
+                        value={inquiryForm.departure_city}
+                        onChange={(e) => setInquiryForm({ ...inquiryForm, departure_city: e.target.value })}
+                        placeholder="e.g. Surat"
+                        style={{ width: '100%', padding: '10px 14px', borderRadius: 'var(--radius-sm)', background: 'rgba(255,255,255,0.06)', border: '1px solid var(--border-color)', color: 'var(--text-primary)', outline: 'none', boxSizing: 'border-box' }}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, marginBottom: '6px' }}>
+                        Meal Preference
+                      </label>
+                      <select
+                        value={inquiryForm.meal_preference}
+                        onChange={(e) => setInquiryForm({ ...inquiryForm, meal_preference: e.target.value })}
+                        style={{ width: '100%', padding: '10px 14px', borderRadius: 'var(--radius-sm)', background: 'var(--bg-card)', border: '1px solid var(--border-color)', color: 'var(--text-primary)', outline: 'none', boxSizing: 'border-box' }}
+                      >
+                        <option value="">No preference</option>
+                        <option value="Vegetarian">Vegetarian</option>
+                        <option value="Pure Vegetarian">Pure Vegetarian</option>
+                        <option value="Jain">Jain</option>
+                        <option value="Vegan">Vegan</option>
+                        <option value="Non-Vegetarian">Non-Vegetarian</option>
+                      </select>
+                    </div>
+                  </div>
+
                   <div>
                     <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, marginBottom: '6px' }}>
                       Any custom requests or vibe preferences?
@@ -761,18 +822,33 @@ export default function TourDetailModal({
           flexWrap: 'wrap',
           gap: '12px'
         }}>
-          <button
-            onClick={() => {
-              onClose();
-              onOpenSplitter(tour);
-            }}
-            id="split-bill-shortcut-btn"
-            className="secondary-btn"
-            style={{ padding: '8px 16px', fontSize: '0.85rem' }}
-          >
-            <Calculator size={16} />
-            <span>Split Cost with Squad 💸</span>
-          </button>
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+            <button
+              onClick={() => {
+                onClose();
+                onOpenSplitter(tour);
+              }}
+              id="split-bill-shortcut-btn"
+              className="secondary-btn"
+              style={{ padding: '8px 14px', fontSize: '0.84rem' }}
+            >
+              <Calculator size={15} />
+              <span>Split Squad Cost 💸</span>
+            </button>
+
+            {onOpenCalculator && (
+              <button
+                onClick={() => {
+                  onClose();
+                  onOpenCalculator(tour);
+                }}
+                className="secondary-btn"
+                style={{ padding: '8px 14px', fontSize: '0.84rem' }}
+              >
+                <span>🧮 Budget Calc</span>
+              </button>
+            )}
+          </div>
 
           <div style={{ display: 'flex', gap: '10px' }}>
             <button
@@ -792,7 +868,7 @@ export default function TourDetailModal({
               }}
             >
               <MessageCircle size={16} />
-              <span>Instant WhatsApp</span>
+              <span>WhatsApp Enquiry</span>
             </button>
 
             <button
@@ -800,7 +876,7 @@ export default function TourDetailModal({
               className="gradient-btn"
               style={{ padding: '8px 20px', fontSize: '0.85rem' }}
             >
-              <span>Book Trip</span>
+              <span>Plan This Trip</span>
               <ChevronRight size={16} />
             </button>
           </div>

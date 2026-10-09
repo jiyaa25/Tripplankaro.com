@@ -1,5 +1,5 @@
-import React from 'react';
-import { SlidersHorizontal, RotateCcw, Globe, Home } from 'lucide-react';
+import React, { useState } from 'react';
+import { SlidersHorizontal, RotateCcw, Sparkles, Filter, X, ArrowUpDown } from 'lucide-react';
 
 export default function TourFilters({
   tourType,
@@ -15,29 +15,48 @@ export default function TourFilters({
   onResetFilters,
   totalResults
 }) {
+  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
+
   const vibes = [
-    { tag: 'all', label: 'All Types', emoji: '✨' },
-    { tag: '#AestheticStays', label: 'Aesthetic Stays', emoji: '🏡' },
-    { tag: '#SquadGoals', label: 'Group Trips', emoji: '👯‍♂️' },
-    { tag: '#InstaWorthy', label: 'Photogenic', emoji: '📸' },
-    { tag: '#AdrenalineRush', label: 'Adventure & Treks', emoji: '🧗‍♀️' },
-    { tag: '#BudgetBangers', label: 'Budget Friendly', emoji: '💸' },
-    { tag: '#SunsetChasers', label: 'Beach & Coastal', emoji: '🏖️' },
-    { tag: '#SoloExplorer', label: 'Solo Friendly', emoji: '🎒' },
-    { tag: '#CultureCraze', label: 'Heritage & Culture', emoji: '🕌' }
+    { tag: 'all', label: 'All Vibes', emoji: '✨' },
+    { tag: '#SunsetChasers', label: 'Sunset Chasers', emoji: '🌅' },
+    { tag: '#AdrenalineRush', label: 'Adrenaline Rush', emoji: '🧗' },
+    { tag: '#InstaWorthy', label: 'Insta Worthy', emoji: '📸' },
+    { tag: '#BudgetBangers', label: 'Budget Bangers', emoji: '💸' },
+    { tag: '#SquadGoals', label: 'Squad Goals', emoji: '👯‍♂️' },
+    { tag: '#SoloExplorer', label: 'Solo Explorer', emoji: '🎒' },
+    { tag: '#AestheticStays', label: 'Aesthetic Stays', emoji: '🏡' }
   ];
 
   const types = [
-    { id: 'all', label: 'All Tours', icon: null },
-    { id: 'Domestic', label: 'India Trips 🇮🇳', icon: null },
-    { id: 'International', label: 'International ✈️', icon: null },
+    { id: 'all', label: 'All Tours' },
+    { id: 'Domestic', label: 'India Trips 🇮🇳' },
+    { id: 'International', label: 'International ✈️' },
   ];
 
   const durations = [
     { id: 'all', label: 'Any Duration' },
-    { id: 'short', label: 'Weekend (2–4 Days)' },
-    { id: 'week', label: 'Weeklong (5–8 Days)' },
-    { id: 'long', label: 'Grand Explorer (9+ Days)' }
+    { id: 'short', label: 'Weekend (≤3D)' },
+    { id: 'medium', label: 'Weeklong (4–6D)' },
+    { id: 'long', label: 'Grand Tour (7D+)' }
+  ];
+
+  const budgetTiers = [
+    { label: 'All Budgets', max: 350000 },
+    { label: 'Under ₹15K', max: 15000 },
+    { label: 'Under ₹25K', max: 25000 },
+    { label: 'Under ₹40K', max: 40000 },
+    { label: 'Under ₹60K', max: 60000 }
+  ];
+
+  const sortOptions = [
+    { id: 'recommended', label: 'Recommended ✨' },
+    { id: 'price-low', label: 'Price: Low to High 💰' },
+    { id: 'price-high', label: 'Price: High to Low 💎' },
+    { id: 'popular', label: 'Trending Vibes 🔥' },
+    { id: 'shortest', label: 'Shortest Duration ⚡' },
+    { id: 'longest', label: 'Longest Duration 🗓️' },
+    { id: 'best-value', label: 'Best Value / Discount %' }
   ];
 
   const hasActiveFilters = tourType !== 'all' || selectedVibe !== 'all' || durationCat !== 'all' || maxPrice < 350000;
@@ -46,50 +65,39 @@ export default function TourFilters({
     <div style={{
       background: 'var(--bg-card)',
       borderRadius: 'var(--radius-lg)',
-      padding: '24px',
+      padding: '22px',
       border: '1px solid var(--border-color)',
-      marginBottom: '36px',
+      marginBottom: '32px',
       boxShadow: 'var(--shadow-sm)'
     }}>
-      {/* Top row: Domestic/International Tabs & Sort */}
+      {/* Top Row: Domestic / International Tabs + Sort + Mobile Filter Toggle */}
       <div style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         flexWrap: 'wrap',
-        gap: '16px',
-        marginBottom: '20px',
+        gap: '14px',
+        marginBottom: '18px',
         borderBottom: '1px solid var(--border-color)',
         paddingBottom: '16px'
       }}>
-        {/* Tour Type tabs — Domestic / International */}
-        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
-          <span style={{
-            fontSize: '0.75rem',
-            fontWeight: 800,
-            color: 'var(--text-muted)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.06em',
-            marginRight: '4px'
-          }}>
-            Destination:
-          </span>
+        {/* Type tabs */}
+        <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', alignItems: 'center' }}>
           {types.map(t => (
             <button
               key={t.id}
               id={`filter-type-${t.id.toLowerCase()}`}
               onClick={() => setTourType(t.id)}
               style={{
-                padding: '8px 18px',
+                padding: '8px 16px',
                 borderRadius: 'var(--radius-full)',
                 border: tourType === t.id ? '1px solid var(--coral-primary)' : '1px solid var(--border-color)',
                 background: tourType === t.id ? 'var(--coral-primary)' : 'rgba(255, 255, 255, 0.05)',
                 color: tourType === t.id ? '#fff' : 'var(--text-secondary)',
                 fontWeight: 700,
-                fontSize: '0.85rem',
+                fontSize: '0.84rem',
                 cursor: 'pointer',
-                transition: 'var(--transition)',
-                fontFamily: 'inherit'
+                transition: 'var(--transition)'
               }}
             >
               {t.label}
@@ -97,106 +105,90 @@ export default function TourFilters({
           ))}
         </div>
 
-        {/* Sort & Count */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
-            <strong>{totalResults}</strong> tours found
+        {/* Results Count & Sort Dropdown */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+          <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+            Showing <strong style={{ color: 'var(--text-primary)' }}>{totalResults}</strong> trips
           </span>
-          <select
-            id="sort-by-select"
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
-            style={{
-              padding: '8px 14px',
-              borderRadius: 'var(--radius-sm)',
-              background: 'var(--bg-secondary)',
-              border: '1px solid var(--border-color)',
-              color: 'var(--text-primary)',
-              fontSize: '0.85rem',
-              fontWeight: 600,
-              outline: 'none',
-              cursor: 'pointer',
-              fontFamily: 'inherit'
-            }}
-          >
-            <option value="featured">✨ Featured & Trending</option>
-            <option value="price_asc">Price: Low to High</option>
-            <option value="price_desc">Price: High to Low</option>
-            <option value="rating">Top Rated (5★)</option>
-            <option value="duration_asc">Duration: Short to Long</option>
-            <option value="duration_desc">Duration: Long to Short</option>
-          </select>
-        </div>
-      </div>
 
-      {/* Row 2: Travel Vibe/Category Tags */}
-      <div style={{ marginBottom: '20px' }}>
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          marginBottom: '10px'
-        }}>
-          <span style={{
-            fontSize: '0.75rem',
-            fontWeight: 800,
-            color: 'var(--text-muted)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.06em'
-          }}>
-            Travel Vibe:
-          </span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <ArrowUpDown size={15} color="var(--text-muted)" />
+            <select
+              id="sort-by-select"
+              value={sortBy}
+              onChange={e => setSortBy(e.target.value)}
+              style={{
+                background: 'var(--bg-secondary)',
+                border: '1px solid var(--border-color)',
+                color: 'var(--text-primary)',
+                padding: '7px 12px',
+                borderRadius: 'var(--radius-sm)',
+                fontSize: '0.82rem',
+                fontWeight: 700,
+                outline: 'none',
+                cursor: 'pointer'
+              }}
+            >
+              {sortOptions.map(opt => (
+                <option key={opt.id} value={opt.id}>{opt.label}</option>
+              ))}
+            </select>
+          </div>
+
           {hasActiveFilters && (
             <button
               onClick={onResetFilters}
               id="reset-filters-btn"
               style={{
-                background: 'none',
-                border: 'none',
-                color: 'var(--coral-primary)',
-                fontSize: '0.78rem',
-                fontWeight: 700,
-                cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '4px',
-                fontFamily: 'inherit'
+                gap: '5px',
+                background: 'rgba(255, 56, 92, 0.1)',
+                border: '1px solid rgba(255, 56, 92, 0.25)',
+                color: 'var(--coral-primary)',
+                padding: '7px 12px',
+                borderRadius: 'var(--radius-full)',
+                fontSize: '0.78rem',
+                fontWeight: 700,
+                cursor: 'pointer'
               }}
             >
               <RotateCcw size={13} />
-              <span>Reset All</span>
+              <span>Clear All</span>
             </button>
           )}
         </div>
+      </div>
 
+      {/* Row 2: Vibe Pills */}
+      <div style={{ marginBottom: '16px' }}>
         <div style={{
           display: 'flex',
           gap: '8px',
           overflowX: 'auto',
-          paddingBottom: '6px'
+          paddingBottom: '6px',
+          scrollbarWidth: 'none'
         }}>
-          {vibes.map((v, i) => {
+          {vibes.map(v => {
             const isSelected = selectedVibe === v.tag;
             return (
               <button
-                key={i}
-                id={`filter-vibe-${i}`}
+                key={v.tag}
                 onClick={() => setSelectedVibe(v.tag)}
                 style={{
-                  padding: '6px 14px',
-                  borderRadius: 'var(--radius-full)',
-                  border: isSelected ? '1px solid var(--coral-primary)' : '1px solid var(--border-color)',
-                  background: isSelected ? 'rgba(255, 56, 92, 0.15)' : 'rgba(255, 255, 255, 0.04)',
-                  color: isSelected ? 'var(--coral-primary)' : 'var(--text-secondary)',
-                  fontWeight: 700,
-                  fontSize: '0.8rem',
-                  cursor: 'pointer',
-                  whiteSpace: 'nowrap',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '6px',
-                  transition: 'var(--transition)',
-                  fontFamily: 'inherit'
+                  padding: '6px 14px',
+                  borderRadius: 'var(--radius-full)',
+                  border: isSelected ? '1px solid var(--coral-primary)' : '1px solid var(--border-color)',
+                  background: isSelected ? 'rgba(255,56,92,0.15)' : 'rgba(255,255,255,0.03)',
+                  color: isSelected ? 'var(--coral-primary)' : 'var(--text-secondary)',
+                  fontSize: '0.8rem',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  whiteSpace: 'nowrap',
+                  transition: 'var(--transition)'
                 }}
               >
                 <span>{v.emoji}</span>
@@ -207,82 +199,64 @@ export default function TourFilters({
         </div>
       </div>
 
-      {/* Row 3: Duration tabs & Price Slider */}
+      {/* Row 3: Budget Tiers & Duration Filters */}
       <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-        gap: '20px',
-        paddingTop: '16px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+        gap: '14px',
+        paddingTop: '12px',
         borderTop: '1px solid var(--border-color)'
       }}>
-        {/* Duration */}
-        <div>
-          <span style={{
-            display: 'block',
-            fontSize: '0.75rem',
-            fontWeight: 800,
-            color: 'var(--text-muted)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.06em',
-            marginBottom: '8px'
-          }}>
-            Duration:
+        {/* Budget Tiers */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
+          <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase' }}>
+            Budget:
           </span>
-          <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
-            {durations.map(d => (
-              <button
-                key={d.id}
-                id={`filter-dur-${d.id}`}
-                onClick={() => setDurationCat(d.id)}
-                style={{
-                  padding: '6px 12px',
-                  borderRadius: 'var(--radius-full)',
-                  border: durationCat === d.id ? '1px solid var(--coral-primary)' : '1px solid var(--border-color)',
-                  background: durationCat === d.id ? 'rgba(255, 56, 92, 0.12)' : 'rgba(255, 255, 255, 0.03)',
-                  color: durationCat === d.id ? 'var(--coral-primary)' : 'var(--text-secondary)',
-                  fontSize: '0.75rem',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  fontFamily: 'inherit'
-                }}
-              >
-                {d.label}
-              </button>
-            ))}
-          </div>
+          {budgetTiers.map(b => (
+            <button
+              key={b.max}
+              onClick={() => setMaxPrice(b.max)}
+              style={{
+                padding: '4px 10px',
+                borderRadius: 'var(--radius-sm)',
+                border: maxPrice === b.max ? '1px solid var(--coral-primary)' : '1px solid var(--border-color)',
+                background: maxPrice === b.max ? 'rgba(255,56,92,0.12)' : 'transparent',
+                color: maxPrice === b.max ? 'var(--coral-primary)' : 'var(--text-secondary)',
+                fontSize: '0.75rem',
+                fontWeight: 700,
+                cursor: 'pointer'
+              }}
+            >
+              {b.label}
+            </button>
+          ))}
         </div>
 
-        {/* Max Price Slider */}
-        <div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-            <span style={{
-              fontSize: '0.75rem',
-              fontWeight: 800,
-              color: 'var(--text-muted)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.06em'
-            }}>
-              Max Budget / Person:
-            </span>
-            <span style={{ color: 'var(--coral-primary)', fontWeight: 800, fontSize: '0.85rem' }}>
-              {maxPrice >= 350000 ? 'Any Budget' : `Under ₹${maxPrice.toLocaleString()}`}
-            </span>
-          </div>
-          <input
-            type="range"
-            id="filter-max-price-slider"
-            min="10000"
-            max="350000"
-            step="5000"
-            value={maxPrice}
-            onChange={(e) => setMaxPrice(parseInt(e.target.value))}
-            style={{ width: '100%', accentColor: 'var(--coral-primary)', cursor: 'pointer' }}
-          />
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem', color: 'var(--text-muted)' }}>
-            <span>₹10,000</span>
-            <span>₹1,50,000</span>
-            <span>₹3,50,000+</span>
-          </div>
+        {/* Duration filters */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
+          <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase' }}>
+            Days:
+          </span>
+          {durations.map(d => (
+            <button
+              key={d.id}
+              onClick={() => setDurationCat(d.id)}
+              style={{
+                padding: '4px 10px',
+                borderRadius: 'var(--radius-sm)',
+                border: durationCat === d.id ? '1px solid var(--coral-primary)' : '1px solid var(--border-color)',
+                background: durationCat === d.id ? 'rgba(255,56,92,0.12)' : 'transparent',
+                color: durationCat === d.id ? 'var(--coral-primary)' : 'var(--text-secondary)',
+                fontSize: '0.75rem',
+                fontWeight: 700,
+                cursor: 'pointer'
+              }}
+            >
+              {d.label}
+            </button>
+          ))}
         </div>
       </div>
     </div>

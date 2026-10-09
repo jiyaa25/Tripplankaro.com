@@ -1,6 +1,6 @@
 # TripPlanKaro
 
-TripPlanKaro is a React/Vite frontend backed by a FastAPI API. The project contains 165 cleaned tours, tour filtering, inquiry submission, custom-trip requests, wishlist support, a squad bill splitter, and an admin portal.
+TripPlanKaro is a React/Vite travel website backed by FastAPI. The current source contains the sampled tour catalogue plus customer enquiry, custom-trip, wishlist, squad cost-splitting, admin management and a real **Happy Travellers** community feed.
 
 ## Project structure
 
@@ -10,7 +10,12 @@ tripplankaro/
 │   ├── main.py
 │   ├── clean_tours.py
 │   ├── requirements.txt
+│   ├── .env.example
 │   └── data/
+│       ├── cleaned_tours.json
+│       ├── inquiries.json
+│       ├── happy_travellers.json
+│       └── review_uploads/
 └── frontend/
     ├── src/
     ├── public/
@@ -27,19 +32,44 @@ From the project root:
 ```bash
 cd backend
 python -m venv .venv
-# Windows PowerShell: .venv\Scripts\Activate.ps1
-# macOS/Linux: source .venv/bin/activate
+```
+
+**Windows PowerShell:**
+
+```powershell
+.venv\Scripts\Activate.ps1
+$env:TRIPPLANKARO_ADMIN_USERNAME="admin"
+$env:TRIPPLANKARO_ADMIN_PASSWORD="replace-with-your-strong-password"
+$env:TRIPPLANKARO_SESSION_SECRET="replace-with-a-long-random-secret"
+```
+
+**macOS/Linux:**
+
+```bash
+source .venv/bin/activate
+export TRIPPLANKARO_ADMIN_USERNAME="admin"
+export TRIPPLANKARO_ADMIN_PASSWORD="replace-with-your-strong-password"
+export TRIPPLANKARO_SESSION_SECRET="replace-with-a-long-random-secret"
+```
+
+Install dependencies and start the API:
+
+```bash
 pip install -r requirements.txt
-
-# Optional: set a custom admin key
-# Windows PowerShell: $env:TRIPPLANKARO_ADMIN_KEY = "your-key"
-# macOS/Linux: export TRIPPLANKARO_ADMIN_KEY=your-key
-
 uvicorn main:app --host 127.0.0.1 --port 8001 --reload
 ```
 
-Backend health check: `http://127.0.0.1:8001/api/health`
-API docs: `http://127.0.0.1:8001/docs`
+Backend health check:
+
+```text
+http://127.0.0.1:8001/api/health
+```
+
+Interactive API documentation:
+
+```text
+http://127.0.0.1:8001/docs
+```
 
 ### 2. Frontend
 
@@ -51,26 +81,73 @@ npm install
 npm run dev
 ```
 
-Then open the Vite URL shown in the terminal (normally `http://localhost:5173`).
+Open the Vite URL shown in the terminal, normally:
 
-The Vite development server proxies `/api` requests to `http://127.0.0.1:8001`. Start the backend first so the tours and forms work.
-
-### Production build
-
-```bash
-cd frontend
-npm install
-npm run build
-npm run preview
+```text
+http://localhost:5173
 ```
+
+Vite proxies both `/api` and uploaded review `/media` files to the FastAPI server.
 
 ## Admin portal
 
-The UI opens the admin portal from the lock icon. The default local key is `tripplan2026`. For a real deployment, set `TRIPPLANKARO_ADMIN_KEY` on the backend and `VITE_ADMIN_KEY` for the frontend build to the same value.
+The admin portal now uses **backend authentication**, not a password embedded in the frontend bundle.
 
-The backend now protects admin inquiry/custom-trip/tour-management endpoints with `X-Admin-Key`.
+1. Set `TRIPPLANKARO_ADMIN_USERNAME`.
+2. Set `TRIPPLANKARO_ADMIN_PASSWORD`.
+3. Set a long random `TRIPPLANKARO_SESSION_SECRET`.
+4. Start the backend.
+5. Open the website and use the lock icon.
+6. Sign in with the configured username/password.
+
+The backend issues a short-lived signed session token. The browser keeps it in `sessionStorage`; admin API calls use `Authorization: Bearer <token>`.
+
+For a production deployment, put the three secrets in the hosting provider's secret/environment-variable manager. Never place them in `frontend/.env`, source control, or client-side JavaScript.
+
+## Customer enquiry data model
+
+Booking inquiries now use one consistent schema while remaining compatible with the existing `inquiries.json` records. The standardized record includes:
+
+- `id`
+- `created_at`
+- `updated_at`
+- `status`
+- `tour_id`
+- `tour_name`
+- `name`
+- `phone`
+- `email`
+- `squad_size`
+- `departure_city`
+- `travel_date`
+- `meal_preference`
+- `notes`
+
+Existing records are normalized when they are read, so old data is not discarded.
+
+## Happy Travellers community
+
+The old hardcoded testimonials have been removed. The public section starts at **0 posts / 0.0 rating** and grows only from real submissions.
+
+Customers can:
+
+- submit their name and phone/WhatsApp number;
+- optionally provide email, trip name and destination;
+- select a 1–5 rating;
+- write their own travel story;
+- optionally upload a JPG/PNG/WEBP trip photo up to 5 MB;
+- see their post immediately after publishing;
+- like other traveller posts.
+
+The public API never exposes the reviewer's phone or email. Admin can inspect those private contact details and remove a post.
+
+The website refreshes the public feed periodically so new posts from other visitors appear without a manual page refresh.
+
+For production, SMS/WhatsApp OTP verification can be added as a separate identity-verification layer using a provider such as MSG91, Twilio or another chosen provider. The current design intentionally avoids inventing a fake OTP mechanism when no messaging provider is configured.
 
 ## API routes
+
+### Public
 
 - `GET /api/health`
 - `GET /api/stats`
@@ -80,12 +157,57 @@ The backend now protects admin inquiry/custom-trip/tour-management endpoints wit
 - `GET /api/vibes`
 - `POST /api/inquiries`
 - `POST /api/custom-trip`
-- `GET /api/admin/inquiries` (admin key)
-- `GET /api/admin/custom-trips` (admin key)
-- `POST /api/admin/tours` (admin key)
-- `PUT /api/admin/tours/{tour_id}` (admin key)
-- `DELETE /api/admin/tours/{tour_id}` (admin key)
+- `GET /api/happy-travellers`
+- `POST /api/happy-travellers`
+- `POST /api/happy-travellers/{review_id}/like`
 
-## Important
+### Admin
 
-`frontend/node_modules` and `frontend/dist` are intentionally excluded from the distributable source archive. Run `npm install` locally instead of copying platform-specific `node_modules`.
+- `POST /api/admin/login`
+- `GET /api/admin/session`
+- `GET /api/admin/inquiries`
+- `GET /api/admin/custom-trips`
+- `GET /api/admin/happy-travellers`
+- `DELETE /api/admin/happy-travellers/{review_id}`
+- `POST /api/admin/tours`
+- `PUT /api/admin/tours/{tour_id}`
+- `DELETE /api/admin/tours/{tour_id}`
+
+## Tour loading
+
+The tour explorer loads 60 tours at a time and supports:
+
+```text
+Showing 1–60 of 165 tours
+[ Load More Tours ]
+```
+
+The next batch is fetched with the API's `offset` parameter and appended to the existing grid. Changing a search/filter/sort starts a fresh result set.
+
+## WhatsApp
+
+The site's WhatsApp contact has been standardized to:
+
+```text
++91 6353731027
+```
+
+## Production notes
+
+- Use HTTPS.
+- Store admin credentials and session secret in the hosting platform's secret manager.
+- Put the FastAPI app behind a production reverse proxy such as Nginx, Caddy or the hosting platform's managed proxy.
+- Use persistent storage/object storage for customer-uploaded photos in production; the included local `data/review_uploads` directory is suitable for a single-server deployment but not a scalable multi-instance architecture.
+- Add a real SMS/WhatsApp OTP provider before advertising phone verification as a verified identity feature.
+- Back up `backend/data` regularly or move customer data to a managed database as traffic grows.
+
+## Frontend production build
+
+```bash
+cd frontend
+npm install
+npm run build
+npm run preview
+```
+
+`frontend/node_modules` and `frontend/dist` are intentionally excluded from the source archive. Run `npm install` locally so platform-specific dependencies are installed correctly.

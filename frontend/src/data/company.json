@@ -1,0 +1,24 @@
+{
+  "name": "Tripplankaro",
+  "tagline": "We Plan, You Enjoy",
+  "description": "Custom trips, budget bangers & unforgettable memories crafted for modern travellers.",
+  "website": "https://tripplankaro.com",
+  "email": "info@triplankaro.com",
+  "phone": "6353731027",
+  "phone_formatted": "+91 63537 31027",
+  "whatsapp": "+916353731027",
+  "whatsapp_number": "916353731027",
+  "instagram": "https://www.instagram.com/trip.plankaro/",
+  "instagram_handle": "@trip.plankaro",
+  "google_review_form": "https://docs.google.com/forms/d/e/1FAIpQLSfAmoLOjL6giTM6M4LlYUG1bi2Rx_Ij-z5_srS93JVtr-sVyw/viewform?usp=sharing&ouid=107288466965431645565",
+  "office_locations": [
+    {
+      "city": "Surat",
+      "address": "UG 12, Blue Arc, Near Althan Garden, Althan Road, Surat – 395007, Gujarat, India"
+    },
+    {
+      "city": "Valsad",
+      "address": "303, 3rd Floor, Millennium Apt, Opp Pragji Tower, Valsad – 396001, Gujarat, India"
+    }
+  ]
+}

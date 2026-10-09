@@ -1,13 +1,17 @@
 import React from 'react';
-import { X, Heart, Trash2, ArrowRight, MessageCircle, Share2, Calculator } from 'lucide-react';
+import { X, Heart, Trash2, ArrowRight, MessageCircle, Share2, Calculator, Scale, Eye } from 'lucide-react';
+import { generateTourWhatsAppMessage, openWhatsApp, createWhatsAppLink } from '../utils/whatsapp';
 
 export default function WishlistDrawer({
   isOpen,
   onClose,
-  savedTours,
+  savedTours = [],
   onRemoveTour,
   onOpenDetails,
-  onOpenSplitter
+  onOpenSplitter,
+  onOpenCalculator,
+  onOpenCompare,
+  recentlyViewed = []
 }) {
   if (!isOpen) return null;
 
@@ -15,14 +19,25 @@ export default function WishlistDrawer({
 
   const handleShareWishlist = () => {
     const listText = savedTours.map(t => `• ${t.tour_name} (${t.pricing?.discounted_price})`).join('\n');
-    const fullText = `🌴 *OUR SQUAD BUCKET LIST ON TRIPPLANKARO* ✈️\n\n${listText}\n\nEstimated Cost: ₹${totalEstimate.toLocaleString()}/head\nCheck them out on tripplankaro.com ("We plan, you enjoy")!`;
+    const fullText = `🌴 *MY TRIPS BUCKET LIST ON TRIPPLANKARO* ✈️\n\n${listText}\n\nEstimated Cost: ₹${totalEstimate.toLocaleString('en-IN')}/person\nExplore on tripplankaro.com ("We Plan, You Enjoy")!`;
 
     if (navigator.share) {
-      navigator.share({ title: 'Squad Wishlist', text: fullText }).catch(() => {});
+      navigator.share({ title: 'My Trips - Tripplankaro', text: fullText }).catch(() => {});
     } else {
       navigator.clipboard.writeText(fullText);
-      alert('Squad bucket list copied to clipboard!');
+      alert('Trip shortlist copied to clipboard!');
     }
+  };
+
+  const handleWhatsAppWishlist = () => {
+    const listText = savedTours.map(t => `• ${t.tour_name} (${t.pricing?.discounted_price})`).join('\n');
+    const message = `Hi Tripplankaro! 👋
+I'm looking at my shortlisted trips on your website:
+${listText}
+
+Estimated budget: ₹${totalEstimate.toLocaleString('en-IN')}/head
+Can you help us plan and check upcoming dates for these?`;
+    openWhatsApp(message);
   };
 
   return (
@@ -36,7 +51,7 @@ export default function WishlistDrawer({
           right: 0,
           bottom: 0,
           width: '100%',
-          maxWidth: '460px',
+          maxWidth: '480px',
           background: 'var(--bg-secondary)',
           borderLeft: '1px solid var(--border-color)',
           display: 'flex',
@@ -56,8 +71,8 @@ export default function WishlistDrawer({
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <Heart size={20} color="var(--coral-primary)" fill="var(--coral-primary)" />
-            <h3 style={{ fontSize: '1.2rem' }}>
-              Squad Saved Trips ({savedTours.length})
+            <h3 style={{ fontSize: '1.2rem', fontWeight: 800 }}>
+              My Trips ({savedTours.length})
             </h3>
           </div>
           <button
@@ -83,80 +98,137 @@ export default function WishlistDrawer({
         {/* Drawer Body */}
         <div style={{ flex: 1, overflowY: 'auto', padding: '20px' }}>
           {savedTours.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '60px 10px', color: 'var(--text-secondary)' }}>
-              <div style={{ fontSize: '3rem', marginBottom: '12px' }}>❤️‍🩹</div>
+            <div style={{ textAlign: 'center', padding: '50px 10px', color: 'var(--text-secondary)' }}>
+              <div style={{ fontSize: '2.8rem', marginBottom: '12px' }}>❤️‍🩹</div>
               <h4 style={{ fontSize: '1.1rem', color: 'var(--text-primary)', marginBottom: '6px' }}>
-                Your Squad Wishlist is Empty
+                No Trips Saved Yet
               </h4>
               <p style={{ fontSize: '0.85rem' }}>
-                Click the heart icon on any tour card to bookmark trips for your squad vacation!
+                Click the heart icon on any tour card to bookmark packages for your upcoming holiday!
               </p>
             </div>
           ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', marginBottom: '24px' }}>
               {savedTours.map((t) => (
                 <div
                   key={t.tour_id}
                   style={{
-                    background: 'rgba(255, 255, 255, 0.03)',
-                    border: '1px solid var(--border-color)',
-                    borderRadius: 'var(--radius-md)',
-                    overflow: 'hidden',
                     display: 'flex',
                     gap: '12px',
-                    padding: '10px'
+                    background: 'rgba(255, 255, 255, 0.03)',
+                    borderRadius: 'var(--radius-md)',
+                    padding: '12px',
+                    border: '1px solid var(--border-color)',
+                    position: 'relative'
                   }}
                 >
                   <img
                     src={t.image}
                     alt={t.tour_name}
-                    style={{ width: '80px', height: '80px', borderRadius: 'var(--radius-sm)', objectFit: 'cover' }}
+                    style={{
+                      width: '74px',
+                      height: '74px',
+                      borderRadius: 'var(--radius-sm)',
+                      objectFit: 'cover',
+                      flexShrink: 0
+                    }}
                   />
-                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                    <div style={{ fontSize: '0.72rem', color: 'var(--coral-primary)', fontWeight: 700 }}>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontSize: '0.7rem', color: 'var(--coral-primary)', fontWeight: 800, textTransform: 'uppercase' }}>
                       {t.destination} • {t.duration_short}
                     </div>
-                    <h4
+                    <h5
                       onClick={() => {
                         onClose();
                         onOpenDetails(t);
                       }}
                       style={{
                         fontSize: '0.9rem',
-                        lineHeight: 1.25,
-                        margin: '2px 0 4px 0',
+                        fontWeight: 700,
+                        margin: '3px 0 6px 0',
                         cursor: 'pointer',
-                        display: '-webkit-box',
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: 'vertical',
-                        overflow: 'hidden'
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis'
                       }}
                     >
                       {t.tour_name}
-                    </h4>
-                    <div style={{ fontSize: '0.95rem', fontWeight: 800, color: 'var(--text-primary)' }}>
-                      {t.pricing?.discounted_price}
+                    </h5>
+
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                      <span style={{ fontSize: '0.95rem', fontWeight: 900, color: 'var(--text-primary)' }}>
+                        {t.pricing?.discounted_price}
+                      </span>
+
+                      {/* Item Actions */}
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        {onOpenCalculator && (
+                          <button
+                            onClick={() => {
+                              onClose();
+                              onOpenCalculator(t);
+                            }}
+                            title="Calculate Budget"
+                            style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', padding: '2px' }}
+                          >
+                            <Calculator size={14} />
+                          </button>
+                        )}
+                        <button
+                          onClick={() => onRemoveTour(t.tour_id)}
+                          title="Remove"
+                          style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', padding: '2px' }}
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      </div>
                     </div>
                   </div>
-
-                  <button
-                    onClick={() => onRemoveTour(t.tour_id)}
-                    title="Remove from saved"
-                    style={{
-                      background: 'none',
-                      border: 'none',
-                      color: 'var(--text-muted)',
-                      cursor: 'pointer',
-                      padding: '6px',
-                      alignSelf: 'flex-start'
-                    }}
-                    onMouseEnter={(e) => e.currentTarget.style.color = '#ef4444'}
-                    onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
-                  >
-                    <Trash2 size={16} />
-                  </button>
                 </div>
               ))}
+            </div>
+          )}
+
+          {/* Recently Viewed Section */}
+          {recentlyViewed && recentlyViewed.length > 0 && (
+            <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '18px', marginTop: '10px' }}>
+              <div style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Eye size={14} />
+                <span>Recently Viewed</span>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                {recentlyViewed.slice(0, 3).map(r => (
+                  <div
+                    key={r.tour_id}
+                    onClick={() => {
+                      onClose();
+                      onOpenDetails(r);
+                    }}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '10px',
+                      padding: '8px 10px',
+                      borderRadius: 'var(--radius-sm)',
+                      background: 'rgba(255,255,255,0.02)',
+                      cursor: 'pointer',
+                      border: '1px solid transparent'
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--border-color)'}
+                    onMouseLeave={e => e.currentTarget.style.borderColor = 'transparent'}
+                  >
+                    <img src={r.image} alt={r.tour_name} style={{ width: '40px', height: '40px', borderRadius: '6px', objectFit: 'cover' }} />
+                    <div style={{ minWidth: 0, flex: 1 }}>
+                      <div style={{ fontSize: '0.82rem', fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        {r.tour_name}
+                      </div>
+                      <div style={{ fontSize: '0.72rem', color: 'var(--coral-primary)', fontWeight: 700 }}>
+                        {r.pricing?.discounted_price}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </div>
@@ -166,40 +238,34 @@ export default function WishlistDrawer({
           <div style={{
             padding: '18px 20px',
             borderTop: '1px solid var(--border-color)',
-            background: 'rgba(0,0,0,0.2)',
+            background: 'rgba(0,0,0,0.15)',
             display: 'flex',
             flexDirection: 'column',
-            gap: '12px'
+            gap: '10px'
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-                Combined Wishlist Total:
-              </span>
-              <span style={{ fontSize: '1.25rem', fontWeight: 900, color: 'var(--coral-primary)' }}>
-                ₹{totalEstimate.toLocaleString()}
+              <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Combined Estimate:</span>
+              <span style={{ fontSize: '1.3rem', fontWeight: 900, color: 'var(--coral-primary)' }}>
+                ₹{totalEstimate.toLocaleString('en-IN')}
               </span>
             </div>
 
-            <div style={{ display: 'flex', gap: '8px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+              <button
+                onClick={handleWhatsAppWishlist}
+                className="gradient-btn"
+                style={{ padding: '10px', fontSize: '0.82rem', justifyContent: 'center' }}
+              >
+                <MessageCircle size={15} />
+                <span>Enquire All on WA</span>
+              </button>
               <button
                 onClick={handleShareWishlist}
                 className="secondary-btn"
-                style={{ flex: 1, padding: '10px', fontSize: '0.85rem' }}
+                style={{ padding: '10px', fontSize: '0.82rem', justifyContent: 'center' }}
               >
                 <Share2 size={15} />
-                <span>Share with Squad</span>
-              </button>
-
-              <button
-                onClick={() => {
-                  onClose();
-                  onOpenSplitter(savedTours[0]);
-                }}
-                className="gradient-btn"
-                style={{ flex: 1, padding: '10px', fontSize: '0.85rem' }}
-              >
-                <Calculator size={15} />
-                <span>Split Bill</span>
+                <span>Share List</span>
               </button>
             </div>
           </div>

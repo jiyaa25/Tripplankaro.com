@@ -1,0 +1,92 @@
+[
+  {
+    "id": "beach",
+    "name": "Beach",
+    "emoji": "🏖️",
+    "description": "Sun, sand, waves & coastal bliss",
+    "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+    "vibe": "#SunsetChasers",
+    "popular_destinations": ["Goa", "Bali", "Andaman", "Thailand"]
+  },
+  {
+    "id": "mountains",
+    "name": "Mountains",
+    "emoji": "🏔️",
+    "description": "Snow peaks, fresh pine air & epic vistas",
+    "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+    "vibe": "#AdrenalineRush",
+    "popular_destinations": ["Manali & Himachal", "Uttarakhand", "Kashmir", "Ladakh"]
+  },
+  {
+    "id": "adventure",
+    "name": "Adventure",
+    "emoji": "🧗",
+    "description": "Trekking, river rafting, jungle safaris & thrills",
+    "image": "https://images.unsplash.com/photo-1533240332313-0db49b459ad6?auto=format&fit=crop&w=600&q=80",
+    "vibe": "#AdrenalineRush",
+    "popular_destinations": ["Rishikesh", "Ladakh", "Meghalaya", "Bali"]
+  },
+  {
+    "id": "party",
+    "name": "Party",
+    "emoji": "🎉",
+    "description": "Nightlife, beach clubs & rooftop raves",
+    "image": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=600&q=80",
+    "vibe": "#SquadGoals",
+    "popular_destinations": ["Goa", "Bangkok", "Dubai", "Bali"]
+  },
+  {
+    "id": "luxury",
+    "name": "Luxury",
+    "emoji": "✨",
+    "description": "5-star retreats, private villas & fine hospitality",
+    "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
+    "vibe": "#AestheticStays",
+    "popular_destinations": ["Dubai", "Udaipur", "Maldives", "Kerala"]
+  },
+  {
+    "id": "culture",
+    "name": "Culture",
+    "emoji": "🛕",
+    "description": "Ancient forts, heritage temples & timeless stories",
+    "image": "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=600&q=80",
+    "vibe": "#InstaWorthy",
+    "popular_destinations": ["Rajasthan", "Varanasi", "Bhutan", "Vietnam"]
+  },
+  {
+    "id": "romantic",
+    "name": "Romantic",
+    "emoji": "💖",
+    "description": "Starlit dinners, cozy stays & fairytale backdrops",
+    "image": "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=600&q=80",
+    "vibe": "#AestheticStays",
+    "popular_destinations": ["Kashmir", "Udaipur", "Bali", "Kerala"]
+  },
+  {
+    "id": "budget",
+    "name": "Budget",
+    "emoji": "💰",
+    "description": "Maximum adventure, minimum wallet damage",
+    "image": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=600&q=80",
+    "vibe": "#BudgetBangers",
+    "popular_destinations": ["Kasol", "Rishikesh", "Goa", "Pushkar"]
+  },
+  {
+    "id": "nature",
+    "name": "Nature",
+    "emoji": "🌿",
+    "description": "Tea gardens, backwaters & peaceful forest trails",
+    "image": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=600&q=80",
+    "vibe": "#SoloExplorer",
+    "popular_destinations": ["Kerala", "Sikkim", "Meghalaya", "Coorg"]
+  },
+  {
+    "id": "food",
+    "name": "Food & Cafes",
+    "emoji": "🍜",
+    "description": "Street food crawls, culinary heritage & hipster cafes",
+    "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80",
+    "vibe": "#InstaWorthy",
+    "popular_destinations": ["Amritsar", "Delhi", "Vietnam", "Thailand"]
+  }
+]

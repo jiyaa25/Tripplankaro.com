@@ -1,7 +1,7 @@
 import React from 'react';
-import { Search, MapPin, Sparkles, ShieldCheck, Clock, Users, ArrowRight, Globe, Home } from 'lucide-react';
+import { Search, MapPin, Sparkles, ShieldCheck, Clock, Users, ArrowRight, Globe, Home, Compass } from 'lucide-react';
 
-const PHONE = '+919023532824';
+const PHONE = '+916353731027';
 
 export default function Hero({
   searchQuery,
@@ -298,11 +298,11 @@ export default function Hero({
               background: 'rgba(255,56,92,0.15)', color: 'var(--coral-primary)',
               display: 'flex', alignItems: 'center', justifyContent: 'center'
             }}>
-              <Users size={18} />
+              <Compass size={18} />
             </div>
             <div style={{ textAlign: 'left' }}>
-              <div style={{ fontWeight: 800, fontSize: '0.95rem' }}>14,500+</div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Happy Travelers</div>
+              <div style={{ fontWeight: 800, fontSize: '0.95rem' }}>100% Custom</div>
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Tailored To You</div>
             </div>
           </div>
 
@@ -315,8 +315,8 @@ export default function Hero({
               <ShieldCheck size={18} />
             </div>
             <div style={{ textAlign: 'left' }}>
-              <div style={{ fontWeight: 800, fontSize: '0.95rem' }}>4.9 / 5.0 ★</div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Verified Reviews</div>
+              <div style={{ fontWeight: 800, fontSize: '0.95rem' }}>Honest Pricing</div>
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Zero Hidden Costs</div>
             </div>
           </div>
 

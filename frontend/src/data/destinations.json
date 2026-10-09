@@ -1,0 +1,667 @@
+[
+  {
+    "destination_id": "goa",
+    "name": "Goa",
+    "country": "India",
+    "region": "West Coast",
+    "image": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1200&q=80",
+    "short_description": "Sun-kissed Arabian shores, bohemian flea markets, Portuguese villas & legendary sunset parties.",
+    "long_story": "Goa is an iconic kaleidoscope of sun, sea, and Indo-Portuguese soul. From the tranquil fishing hamlets of South Goa with their secluded palm-fringed sands to the pulsating beach shacks and night markets of the North, it offers an escape for every tempo of travel. Cycle through Latin Quarters in Fontainhas, feast on spicy fish curry rice, or watch the sky turn tangerine over Vagator.",
+    "best_time_to_visit": "October to March",
+    "monthly_weather": [
+      { "month": "Jan", "temp": "21–31°C", "rainfall": "Zero", "crowd": "High", "verdict": "Peak season, ideal weather" },
+      { "month": "Feb", "temp": "22–32°C", "rainfall": "Zero", "crowd": "High", "verdict": "Pleasant breezes & carnival vibe" },
+      { "month": "Mar", "temp": "24–33°C", "rainfall": "Low", "crowd": "Moderate", "verdict": "Great beach weather, fewer crowds" },
+      { "month": "Apr", "temp": "26–34°C", "rainfall": "Low", "crowd": "Low", "verdict": "Warm, great budget deals" },
+      { "month": "May", "temp": "28–35°C", "rainfall": "Moderate", "crowd": "Low", "verdict": "Hot & humid, pre-monsoon" },
+      { "month": "Jun", "temp": "25–30°C", "rainfall": "Heavy", "crowd": "Low", "verdict": "Monsoon magic, lush greenery" },
+      { "month": "Jul", "temp": "24–29°C", "rainfall": "Very Heavy", "crowd": "Low", "verdict": "Dudhsagar waterfalls in full glory" },
+      { "month": "Aug", "temp": "24–29°C", "rainfall": "Heavy", "crowd": "Low", "verdict": "Scenic countryside drives" },
+      { "month": "Sep", "temp": "24–30°C", "rainfall": "Moderate", "crowd": "Moderate", "verdict": "Monsoon retreats, lush nature" },
+      { "month": "Oct", "temp": "24–32°C", "rainfall": "Low", "crowd": "Moderate", "verdict": "Season kickstarts, beach shacks open" },
+      { "month": "Nov", "temp": "23–32°C", "rainfall": "Low", "crowd": "High", "verdict": "Sunny, crisp evenings" },
+      { "month": "Dec", "temp": "21–31°C", "rainfall": "Zero", "crowd": "Peak", "verdict": "Festive spirit, Christmas & NYE vibes" }
+    ],
+    "average_temperature": "28°C",
+    "rainfall_information": "Heavy tropical monsoon from June to September; dry and sunny from October to May.",
+    "crowd_information": "High peak during December–January; calm and relaxed from July to September.",
+    "price_level": "Moderate (₹₹)",
+    "ideal_duration": "4 to 6 Days",
+    "currency": "INR (₹)",
+    "languages": ["Konkani", "English", "Hindi", "Marathi"],
+    "culture": "A harmonious blend of Konkani traditions and 450 years of Portuguese architecture and lifestyle.",
+    "people": "Known for 'susegad' — a relaxed, contented, and warm outlook on life.",
+    "clothing": "Light breathable cottons, beachwear, comfortable sandals, sunglasses & hats.",
+    "food": "Goan Fish Curry, Prawn Balchão, Bebinca, Poi bread, Xacuti, Pork Vindaloo, Feni.",
+    "must_try_foods": ["Goan Prawn Curry Thali", "Pork/Chicken Vindaloo", "Warm Bebinca with vanilla scoop", "Fresh Kokum Sharbat"],
+    "history": "Ruled by Kadamba dynasty, Adil Shahi sultans, and Portuguese colonizers from 1510 until liberation in 1961.",
+    "heritage_story": "Fontainhas still retains vibrant pastel homes, oyster-shell window panes, and charming old balconies.",
+    "travel_tips": [
+      "Rent a two-wheeler or self-drive car for effortless exploration.",
+      "Carry sunscreen and drink tender coconut water frequently.",
+      "North Goa is vibrant & happening; South Goa is quiet, serene & boutique."
+    ],
+    "local_etiquette": [
+      "Respect sacred dress codes when visiting churches and temples.",
+      "Avoid littering plastic on the beaches; keep Goa pristine.",
+      "Always ask fishermen before snapping close-up portraits."
+    ],
+    "top_attractions": [
+      "Basilica of Bom Jesus",
+      "Fort Aguada & Lighthouse",
+      "Chapora Fort (Dil Chahta Hai point)",
+      "Anjuna Flea Market",
+      "Palolem Beach"
+    ],
+    "hidden_gems": [
+      "Butterfly Beach boat ride",
+      "Cola Beach freshwater lagoon",
+      "Fontainhas heritage walking trail",
+      "Divar Island ferry loop"
+    ],
+    "map_coordinates": { "lat": 15.2993, "lng": 74.124 },
+    "map_markers": [
+      { "name": "Fort Aguada", "type": "Heritage", "lat": 15.4925, "lng": 73.7737, "desc": "17th-century Portuguese fortress overlooking Arabian Sea" },
+      { "name": "Basilica of Bom Jesus", "type": "Heritage", "lat": 15.5009, "lng": 73.9116, "desc": "UNESCO World Heritage Baroque church holding St. Francis Xavier's relics" },
+      { "name": "Baga Beach", "type": "Beach", "lat": 15.5553, "lng": 73.7517, "desc": "Famous beach with watersports, bustling shacks and vibrant evenings" },
+      { "name": "Palolem Beach", "type": "Beach", "lat": 15.0101, "lng": 74.0232, "desc": "Crescent-shaped peaceful South Goa bay with scenic beach huts" },
+      { "name": "Fontainhas Latin Quarter", "type": "Photo Spot", "lat": 15.4989, "lng": 73.8315, "desc": "Pastel Portuguese homes, wrought iron balconies & quirky art cafes" }
+    ],
+    "activities": ["Scuba diving", "Sunset catamaran cruises", "Kayaking in backwaters", "Clubbing at Vagator", "Heritage photography walks"],
+    "photo_spots": ["Parra Coconut Tree Road", "Chapora Fort ramparts", "Cabo de Rama Cliff", "Fontainhas alleyways"],
+    "faq": [
+      { "q": "Is Goa safe for solo female travellers?", "a": "Yes, Goa is widely regarded as one of the safest tourist destinations in India." },
+      { "q": "What is the best way to get around Goa?", "a": "Renting a scooter or self-drive car offers the maximum flexibility." }
+    ],
+    "related_tour_ids": ["1", "2", "3"],
+    "featured": true,
+    "active": true
+  },
+  {
+    "destination_id": "manali",
+    "name": "Manali & Himachal",
+    "country": "India",
+    "region": "Western Himalayas",
+    "image": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",
+    "short_description": "Snow-capped peaks, roaring Beas river, pine forests, hipster cafes & gateway to high mountain passes.",
+    "long_story": "Nestled in the breathtaking Beas River valley, Manali blends fairy-tale pine groves with high-octane Himalayan thrill. Explore rustic wooden temples in Old Manali, cross through the engineering marvel of Atal Tunnel to reach barren Sissu, or curl up with hot ginger lemon honey tea in a bohemian cedar cafe.",
+    "best_time_to_visit": "March to June (Summer) & October to February (Snow)",
+    "monthly_weather": [
+      { "month": "Jan", "temp": "-5–8°C", "rainfall": "Heavy Snow", "crowd": "High", "verdict": "Peak snow season & skiing" },
+      { "month": "Feb", "temp": "-3–10°C", "rainfall": "Moderate Snow", "crowd": "Moderate", "verdict": "Snow activities in Solang" },
+      { "month": "Mar", "temp": "5–16°C", "rainfall": "Low", "crowd": "Moderate", "verdict": "Spring blooms & pleasant days" },
+      { "month": "Apr", "temp": "8–22°C", "rainfall": "Low", "crowd": "High", "verdict": "Apple blossoms & clear mountain vistas" },
+      { "month": "May", "temp": "12–26°C", "rainfall": "Low", "crowd": "Peak", "verdict": "Escape the summer plains" },
+      { "month": "Jun", "temp": "14–28°C", "rainfall": "Moderate", "crowd": "Peak", "verdict": "Rohtang Pass opens" },
+      { "month": "Jul", "temp": "15–24°C", "rainfall": "Heavy", "crowd": "Low", "verdict": "Monsoon; watch for road advisories" },
+      { "month": "Aug", "temp": "15–23°C", "rainfall": "Heavy", "crowd": "Low", "verdict": "Lush green valley & apple harvest" },
+      { "month": "Sep", "temp": "12–21°C", "rainfall": "Low", "crowd": "Moderate", "verdict": "Golden autumn light, serene trails" },
+      { "month": "Oct", "temp": "6–18°C", "rainfall": "Zero", "crowd": "Moderate", "verdict": "Crisp air, golden chinar leaves" },
+      { "month": "Nov", "temp": "2–14°C", "rainfall": "Low", "crowd": "Moderate", "verdict": "Early winter chills & frosty mornings" },
+      { "month": "Dec", "temp": "-2–10°C", "rainfall": "Moderate Snow", "crowd": "High", "verdict": "White Christmas & New Year celebrations" }
+    ],
+    "average_temperature": "14°C",
+    "rainfall_information": "Monsoon rains in July-August; heavy snowfall between late December and February.",
+    "crowd_information": "High during May-June and Christmas-New Year week.",
+    "price_level": "Budget to Moderate (₹–₹₹)",
+    "ideal_duration": "4 to 7 Days",
+    "currency": "INR (₹)",
+    "languages": ["Hindi", "Pahari", "English"],
+    "culture": "Dev Bhoomi folklore, Tibetan Buddhist monasteries, and wood-and-stone Kath Kuni architecture.",
+    "people": "Generous and welcoming mountain locals with deep reverence for nature and local deities.",
+    "clothing": "Thermal innerwear, fleece, heavy down jacket in winter; light jacket for summer evenings.",
+    "food": "Siddu with ghee, Trout fish, Thukpa, Momos, Babru, Kullu Dham.",
+    "must_try_foods": ["Steaming hot Siddu with walnut chutney", "Fresh Tirthan Valley grilled trout", "Tibetan Butter Tea & Thukpa"],
+    "history": "Named after the sage Manu, believed to have recreated human life here after the great deluge.",
+    "heritage_story": "Hadimba Temple, built in 1553 inside Dhungri Van Vihar, stands completely carved of cedar wood.",
+    "travel_tips": [
+      "Book your Rohtang Pass permit well in advance during summer months.",
+      "Acclimatize properly if heading higher into Spiti or Leh from Manali.",
+      "Carry good trekking shoes with anti-slip grip."
+    ],
+    "local_etiquette": [
+      "Do not touch religious deities or temple sanctums unless invited.",
+      "Respect mountain serenity; avoid loud music on nature trails."
+    ],
+    "top_attractions": [
+      "Hadimba Devi Temple",
+      "Solang Valley & Rohtang Pass",
+      "Old Manali Cafe Street",
+      "Atal Tunnel & Sissu Waterfall",
+      "Jogini Waterfalls Trek"
+    ],
+    "hidden_gems": [
+      "Sajla Waterfall hidden pool",
+      "Naggar Castle & Roerich Art Gallery",
+      "Jana Waterfall traditional meal point",
+      "Sethan Igloo Village (winter)"
+    ],
+    "map_coordinates": { "lat": 32.2396, "lng": 77.1887 },
+    "map_markers": [
+      { "name": "Hadimba Temple", "type": "Heritage", "lat": 32.2483, "lng": 77.1812, "desc": "Ancient wooden temple amid cedar woods" },
+      { "name": "Solang Valley", "type": "Adventure", "lat": 32.3166, "lng": 77.1575, "desc": "Hub for paragliding, zorbing & winter skiing" },
+      { "name": "Atal Tunnel (North Portal)", "type": "Scenic", "lat": 32.4137, "lng": 77.1642, "desc": "World's longest highway tunnel above 10,000 feet" },
+      { "name": "Jogini Waterfalls", "type": "Nature", "lat": 32.2687, "lng": 77.1972, "desc": "Cascading mountain waterfall accessible via scenic hike" }
+    ],
+    "activities": ["Paragliding in Solang", "River rafting on the Beas", "Igloo camping in Sethan", "Cafe hopping in Old Manali", "Jogini Waterfall trek"],
+    "photo_spots": ["Sissu Waterfall lookout", "Naggar Castle balcony", "Old Manali wooden bridge", "Gulaba snow viewpoint"],
+    "faq": [
+      { "q": "When does it snow in Manali?", "a": "Snowfall typically begins around mid-to-late December and continues through February." }
+    ],
+    "related_tour_ids": ["4", "5", "6"],
+    "featured": true,
+    "active": true
+  },
+  {
+    "destination_id": "kashmir",
+    "name": "Kashmir",
+    "country": "India",
+    "region": "Northern Himalayas",
+    "image": "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&w=1200&q=80",
+    "short_description": "Paradise on Earth: Dal Lake shikaras, cedar-rimmed Gulmarg meadows & saffron valleys.",
+    "long_story": "Celebrated by poets for centuries, Kashmir is a dream painted in willow trees, chinars, and snow-draped peaks. Wake up to misty mornings on a cedar-carved houseboat on Dal Lake, ride the world's highest gondola over powdery slopes in Gulmarg, and stroll through the meadows of Pahalgam where shepherd flutes echo against pine hills.",
+    "best_time_to_visit": "March to October (Greenery & Flowers) / Dec to Feb (Snow)",
+    "monthly_weather": [
+      { "month": "Jan", "temp": "-6–5°C", "rainfall": "Snow", "crowd": "High", "verdict": "Chilai Kalan, ski heaven" },
+      { "month": "Feb", "temp": "-3–8°C", "rainfall": "Snow", "crowd": "Moderate", "verdict": "Powder skiing in Gulmarg" },
+      { "month": "Mar", "temp": "3–14°C", "rainfall": "Low", "crowd": "Moderate", "verdict": "Almond blossoms in Srinagar" },
+      { "month": "Apr", "temp": "7–19°C", "rainfall": "Low", "crowd": "Peak", "verdict": "Asia's largest Tulip Garden blooms" },
+      { "month": "May", "temp": "11–24°C", "rainfall": "Low", "crowd": "Peak", "verdict": "Lush green Betaab Valley" },
+      { "month": "Jun", "temp": "15–28°C", "rainfall": "Low", "crowd": "Peak", "verdict": "Golden sun & pine scented air" },
+      { "month": "Jul", "temp": "17–30°C", "rainfall": "Low", "crowd": "Moderate", "verdict": "Alpine lakes trekking season" },
+      { "month": "Aug", "temp": "16–29°C", "rainfall": "Low", "crowd": "Moderate", "verdict": "Apple picking begins" },
+      { "month": "Sep", "temp": "11–26°C", "rainfall": "Zero", "crowd": "Moderate", "verdict": "Pristine clear skies & saffron harvest" },
+      { "month": "Oct", "temp": "5–20°C", "rainfall": "Zero", "crowd": "High", "verdict": "Fiery Chinar foliage throughout valley" },
+      { "month": "Nov", "temp": "1–14°C", "rainfall": "Low", "crowd": "Low", "verdict": "Crisp autumn turning into winter" },
+      { "month": "Dec", "temp": "-4–7°C", "rainfall": "Snow", "crowd": "High", "verdict": "Winter wonderland transformation" }
+    ],
+    "average_temperature": "15°C",
+    "rainfall_information": "Crisp dry summers; snow in winters from late December to February.",
+    "crowd_information": "Peak during Tulip Festival (April) and Summer holidays (May-June).",
+    "price_level": "Moderate to Premium (₹₹–₹₹₹)",
+    "ideal_duration": "5 to 8 Days",
+    "currency": "INR (₹)",
+    "languages": ["Kashmiri", "Urdu", "Hindi", "English"],
+    "culture": "Rich Sufi traditions, Pashmina craftsmanship, paper mache artistry, and hospitality.",
+    "people": "Known for warmth, offering Kahwa tea to visitors with deep graciousness.",
+    "clothing": "Modest layers; warm thermals and heavy woolens during autumn and winter.",
+    "food": "Rogan Josh, Gushtaba, Yakhni, Dum Aloo, Nadru Yakhni, Kashmiri Pulao, Kahwa.",
+    "must_try_foods": ["Authentic 7-course Wazwan feast", "Kashmiri Noon Chai with freshly baked Lavasa", "Saffron Kahwa with crushed almonds"],
+    "history": "Historical crossroads of Buddhist, Hindu, and Islamic philosophy along the Silk Road.",
+    "heritage_story": "Houseboats on Dal Lake were first conceived by the British when local kings forbade foreigners from owning land.",
+    "travel_tips": [
+      "Pre-book Gulmarg Gondola tickets Phase 1 & 2 weeks in advance.",
+      "Spend at least one night aboard a heritage Dal Lake or Nigeen Lake houseboat.",
+      "Bargain politely in artisan handicraft showrooms."
+    ],
+    "local_etiquette": [
+      "Dress modestly when visiting Jamia Masjid and Hazratbal Shrine.",
+      "Remove footwear when entering houseboats."
+    ],
+    "top_attractions": [
+      "Dal Lake & Floating Market",
+      "Gulmarg Gondola & Apharwat Peak",
+      "Betaab Valley & Aru Valley in Pahalgam",
+      "Shankaracharya Temple & Mughal Gardens",
+      "Sonamarg Thajiwas Glacier"
+    ],
+    "hidden_gems": [
+      "Doodhpathri (Valley of Milk)",
+      "Chatpal untouched alpine retreat",
+      "Gurez Valley frontier wilderness",
+      "Pari Mahal sunset terraces"
+    ],
+    "map_coordinates": { "lat": 34.0837, "lng": 74.7973 },
+    "map_markers": [
+      { "name": "Dal Lake", "type": "Scenic", "lat": 34.1125, "lng": 74.8698, "desc": "Jewel of Srinagar featuring shikara rides and floating markets" },
+      { "name": "Gulmarg Gondola", "type": "Adventure", "lat": 34.0484, "lng": 74.3805, "desc": "One of the highest cable cars in the world reaching 13,780 feet" },
+      { "name": "Betaab Valley", "type": "Nature", "lat": 34.0134, "lng": 75.3484, "desc": "Verdant valley surrounded by snow-clad mountains in Pahalgam" }
+    ],
+    "activities": ["Shikara ride at sunset", "Gulmarg Gondola cable car", "Pony trek in Baisaran", "Houseboat stay", "Saffron farm walk in Pampore"],
+    "photo_spots": ["Dal Lake sunrise shikara", "Pari Mahal Mughal arches", "Betaab Valley wooden bridge", "Apharwat snowline"],
+    "faq": [
+      { "q": "Is Kashmir safe for family tourists?", "a": "Yes, millions of families and couples visit Jammu & Kashmir every year with standard tourist infrastructure." }
+    ],
+    "related_tour_ids": ["7", "8", "9"],
+    "featured": true,
+    "active": true
+  },
+  {
+    "destination_id": "kerala",
+    "name": "Kerala",
+    "country": "India",
+    "region": "South India",
+    "image": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=80",
+    "short_description": "God's Own Country: tranquil emerald backwaters, rolling Munnar tea hills & Ayurvedic bliss.",
+    "long_story": "From the spice-scented mountain mists of Munnar to the languid palms of the Alleppey backwaters, Kerala unfolds at a serene, poetic rhythm. Cruise aboard a converted Kettuvallam houseboat, breathe in crisp tea estate air, and experience ancient healing through authentic Ayurvedic therapies.",
+    "best_time_to_visit": "September to March",
+    "monthly_weather": [
+      { "month": "Jan", "temp": "22–31°C", "rainfall": "Zero", "crowd": "High", "verdict": "Pleasant breezes & backwater cruising" },
+      { "month": "Feb", "temp": "23–32°C", "rainfall": "Zero", "crowd": "Moderate", "verdict": "Great beach & tea estate climate" },
+      { "month": "Mar", "temp": "25–34°C", "rainfall": "Low", "crowd": "Moderate", "verdict": "Warm days, cool hill stations" },
+      { "month": "Apr", "temp": "26–34°C", "rainfall": "Moderate", "crowd": "Low", "verdict": "Summer warmth, Vishu celebrations" },
+      { "month": "May", "temp": "26–33°C", "rainfall": "Moderate", "crowd": "Low", "verdict": "Pre-monsoon showers" },
+      { "month": "Jun", "temp": "24–30°C", "rainfall": "Heavy", "crowd": "Low", "verdict": "Monsoon arrival, peak Ayurveda season" },
+      { "month": "Jul", "temp": "24–29°C", "rainfall": "Heavy", "crowd": "Low", "verdict": "Waterfalls roaring, rejuvenating treatments" },
+      { "month": "Aug", "temp": "24–30°C", "rainfall": "Moderate", "crowd": "High", "verdict": "Onam festival & Nehru Trophy Snake Boat races" },
+      { "month": "Sep", "temp": "24–31°C", "rainfall": "Moderate", "crowd": "Moderate", "verdict": "Post-monsoon freshness, lush green everywhere" },
+      { "month": "Oct", "temp": "24–31°C", "rainfall": "Moderate", "crowd": "Moderate", "verdict": "Tour season starts, pleasant mornings" },
+      { "month": "Nov", "temp": "23–31°C", "rainfall": "Low", "crowd": "High", "verdict": "Cool hill weather in Munnar" },
+      { "month": "Dec", "temp": "22–31°C", "rainfall": "Low", "crowd": "Peak", "verdict": "Cochin Carnival, ideal holiday time" }
+    ],
+    "average_temperature": "27°C",
+    "rainfall_information": "Southwest monsoon (June-August) brings nourishing rain; dry season from November to April.",
+    "crowd_information": "High during December-January and August (Onam boat races).",
+    "price_level": "Moderate (₹₹)",
+    "ideal_duration": "5 to 8 Days",
+    "currency": "INR (₹)",
+    "languages": ["Malayalam", "English", "Hindi"],
+    "culture": "Kathakali dance-drama, Kalaripayattu martial art, Ayurvedic wellness, and spice trade legacy.",
+    "people": "High literacy, progressive and gentle demeanor with deep community bonds.",
+    "clothing": "Breathable cottons, linen shirts, sunhats, and light wrap for evenings in Munnar hills.",
+    "food": "Appam with vegetable stew, Malabar Parotta with chicken roast, Karimeen Pollichathu, Payasam.",
+    "must_try_foods": ["Pearl Spot fish baked in banana leaf (Karimeen Pollichathu)", "Appam with rich coconut milk stew", "Traditional Kerala Sadya on banana leaf"],
+    "history": "Ancient maritime center traded with Phoenicians, Romans, and Arabs for cinnamon and black pepper.",
+    "heritage_story": "Fort Kochi retains Chinese fishing nets, Jewish synagogues, and Dutch palaces side by side.",
+    "travel_tips": [
+      "Combine 2 nights in Munnar hills with 1 night on an Alleppey houseboat.",
+      "Taste fresh spice farm infusions in Thekkady.",
+      "Wear lifejackets during canoe and bamboo rafting."
+    ],
+    "local_etiquette": [
+      "Dhoti/sari may be required for entering certain historic temples in Trivandrum.",
+      "Tip houseboat staff respectfully for attentive cooking service."
+    ],
+    "top_attractions": [
+      "Alleppey & Kumarakom Backwaters",
+      "Munnar Tea Gardens & Eravikulam Park",
+      "Fort Kochi & Chinese Fishing Nets",
+      "Periyar Wildlife Sanctuary (Thekkady)",
+      "Varkala Cliff Beach"
+    ],
+    "hidden_gems": [
+      "Marari peaceful fishing village beach",
+      "Kolukkumalai (World's highest organic tea estate)",
+      "Athirappilly Falls (Niagara of India)",
+      "Vembanad bird sanctuary hidden channels"
+    ],
+    "map_coordinates": { "lat": 9.9312, "lng": 76.2673 },
+    "map_markers": [
+      { "name": "Fort Kochi", "type": "Heritage", "lat": 9.9656, "lng": 76.2421, "desc": "Colonial seaside neighborhood with iconic cantilevered fishing nets" },
+      { "name": "Munnar Tea Plantations", "type": "Nature", "lat": 10.0889, "lng": 77.0595, "desc": "Sprawling rolling emerald tea hills shrouded in mist" },
+      { "name": "Alleppey Backwaters", "type": "Scenic", "lat": 9.4981, "lng": 76.3388, "desc": "Serene labyrinth of palm-fringed canals, lagoons and houseboats" }
+    ],
+    "activities": ["Houseboat overnight cruise", "Tea tasting workshop in Munnar", "Kathakali and martial arts show", "Spice plantation walking tour", "Bamboo rafting in Periyar"],
+    "photo_spots": ["Munnar Top Station sunrise", "Alleppey sunset over paddy fields", "Varkala Cliff ocean view", "Fort Kochi fishing nets against dusk"],
+    "faq": [
+      { "q": "Is food included on Alleppey houseboats?", "a": "Yes, authentic Kerala meals (lunch, dinner, breakfast) are freshly prepared onboard by your private chef." }
+    ],
+    "related_tour_ids": ["10", "11", "12"],
+    "featured": true,
+    "active": true
+  },
+  {
+    "destination_id": "rajasthan",
+    "name": "Rajasthan",
+    "country": "India",
+    "region": "Northwest India",
+    "image": "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1200&q=80",
+    "short_description": "Land of Maharajas: golden Thar dunes, pink palace corridors, lakeside havelis & royal heritage.",
+    "long_story": "Rajasthan is a regal journey through centuries of chivalry, romance, and artistic splendor. Marvel at the sandstone ramparts of Jaisalmer glowing like gold in the desert sunset, float past the shimmering white palaces of Udaipur's Lake Pichola, and shop for hand-block prints in the pink bazaar corridors of Jaipur.",
+    "best_time_to_visit": "October to March",
+    "monthly_weather": [
+      { "month": "Jan", "temp": "8–23°C", "rainfall": "Zero", "crowd": "High", "verdict": "Pleasant, sunny daytime, cool nights" },
+      { "month": "Feb", "temp": "12–27°C", "rainfall": "Zero", "crowd": "High", "verdict": "Jaisalmer Desert Festival month" },
+      { "month": "Mar", "temp": "17–33°C", "rainfall": "Zero", "crowd": "Moderate", "verdict": "Warm afternoons, great royal touring" },
+      { "month": "Apr", "temp": "23–38°C", "rainfall": "Low", "crowd": "Low", "verdict": "Hot plains, budget bargains" },
+      { "month": "May", "temp": "27–42°C", "rainfall": "Low", "crowd": "Low", "verdict": "Extreme heat; visit Mount Abu hill station" },
+      { "month": "Jun", "temp": "28–40°C", "rainfall": "Low", "crowd": "Low", "verdict": "Summer season" },
+      { "month": "Jul", "temp": "26–35°C", "rainfall": "Moderate", "crowd": "Low", "verdict": "Monsoon turns Udaipur hills emerald green" },
+      { "month": "Aug", "temp": "25–33°C", "rainfall": "Moderate", "crowd": "Moderate", "verdict": "Teej festival & green Aravalli views" },
+      { "month": "Sep", "temp": "23–34°C", "rainfall": "Low", "crowd": "Moderate", "verdict": "Clear skies return" },
+      { "month": "Oct", "temp": "18–34°C", "rainfall": "Zero", "crowd": "High", "verdict": "Peak tourist season begins" },
+      { "month": "Nov", "temp": "13–29°C", "rainfall": "Zero", "crowd": "Peak", "verdict": "Pushkar Camel Fair & royal weather" },
+      { "month": "Dec", "temp": "9–24°C", "rainfall": "Zero", "crowd": "Peak", "verdict": "Chilly desert nights by campfire" }
+    ],
+    "average_temperature": "25°C",
+    "rainfall_information": "Arid and semi-arid climate with minimal rainfall outside brief monsoon showers in July-August.",
+    "crowd_information": "Heaviest in November (Pushkar Fair) and December-January.",
+    "price_level": "Budget to Royal Luxury (₹–₹₹₹₹)",
+    "ideal_duration": "6 to 9 Days",
+    "currency": "INR (₹)",
+    "languages": ["Hindi", "Rajasthani", "Marwari", "English"],
+    "culture": "Rajput valor, vibrant turbans, Ghoomar dance, Kalbelia music, and miniature paintings.",
+    "people": "Fiercely proud of royal heritage and known for the greeting 'Padharo Mhare Des' (Welcome to our land).",
+    "clothing": "Modest breathable cottons, sunglasses, sturdy walking footwear for forts, warm jacket for desert nights.",
+    "food": "Dal Baati Churma, Laal Maas, Ker Sangri, Gatte ki Sabzi, Pyaaz Kachori, Ghevar.",
+    "must_try_foods": ["Ghee-drenched Dal Baati Churma", "Fiery Rajput Laal Maas mutton curry", "Honeycomb Ghevar dessert from Jaipur"],
+    "history": "Ancient Rajput kingdoms, Mughal alliances, and majestic sovereign princely states.",
+    "heritage_story": "Amer Fort's Sheesh Mahal was engineered so that a single oil lamp illuminated the entire mirror-inlaid chamber.",
+    "travel_tips": [
+      "Carry water and wear walking shoes as fort complexes are massive.",
+      "Stay in at least one converted heritage Haveli for an authentic royal feel.",
+      "Plan camel safari at sunset to avoid harsh midday heat."
+    ],
+    "local_etiquette": [
+      "Seek permission before photographing village women or artisans.",
+      "Remove shoes before entering palaces and temples."
+    ],
+    "top_attractions": [
+      "Amer Fort & Hawa Mahal (Jaipur)",
+      "City Palace & Lake Pichola (Udaipur)",
+      "Mehrangarh Fort & Blue City (Jodhpur)",
+      "Jaisalmer Golden Fort & Sam Sand Dunes",
+      "Pushkar Sacred Lake & Brahma Temple"
+    ],
+    "hidden_gems": [
+      "Bundi painted havelis and stepwells",
+      "Kumbhalgarh Fort (World's second longest wall)",
+      "Bishnoi village eco-safari",
+      "Khuri dunes untouched by tourist crowds"
+    ],
+    "map_coordinates": { "lat": 26.9124, "lng": 75.7873 },
+    "map_markers": [
+      { "name": "Amer Fort", "type": "Heritage", "lat": 26.9855, "lng": 75.8513, "desc": "Imposing hilltop fortress featuring mirror palaces and sweeping ramparts" },
+      { "name": "Lake Pichola", "type": "Scenic", "lat": 24.5764, "lng": 73.6806, "desc": "Picturesque freshwater lake surrounded by white royal palaces" },
+      { "name": "Mehrangarh Fort", "type": "Heritage", "lat": 26.2978, "lng": 73.0189, "desc": "Towering citadel guarding the blue rooftops of Jodhpur" }
+    ],
+    "activities": ["Camel safari in Thar dunes", "Sunset boat cruise on Lake Pichola", "Zip-lining over Mehrangarh Fort", "Hot air balloon ride over Jaipur", "Folk dance evening in desert camp"],
+    "photo_spots": ["Hawa Mahal facade from Tattoo Cafe", "Amer Fort Maota Lake reflection", "Jodhpur Blue City alleyways", "Sam Dunes sunset silhouette"],
+    "faq": [
+      { "q": "Can we visit multiple cities in one week?", "a": "Yes! The classic Golden Triangle + Udaipur route (Jaipur - Jodhpur - Udaipur) is popular for 6–7 day trips." }
+    ],
+    "related_tour_ids": ["13", "14", "15"],
+    "featured": true,
+    "active": true
+  },
+  {
+    "destination_id": "uttarakhand",
+    "name": "Uttarakhand",
+    "country": "India",
+    "region": "Central Himalayas",
+    "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
+    "short_description": "Land of the Gods: Rishikesh yoga & rafting, sacred Kedarnath peaks, Nainital lakes & Mussoorie hills.",
+    "long_story": "From the swirling Ganga aartis of Haridwar and the adrenaline rapids of Rishikesh to the silent alpine meadows of Chopta and the sacred Kedarnath shrine, Uttarakhand is an exhilarating Himalayan sanctuary.",
+    "best_time_to_visit": "March to June & September to November",
+    "monthly_weather": [
+      { "month": "Jan", "temp": "-2–12°C", "rainfall": "Snow in high hills", "crowd": "Moderate", "verdict": "Auli skiing season" },
+      { "month": "Feb", "temp": "1–15°C", "rainfall": "Snow in high hills", "crowd": "Moderate", "verdict": "Crisp sunny winter days" },
+      { "month": "Mar", "temp": "8–22°C", "rainfall": "Low", "crowd": "Moderate", "verdict": "Ideal for river rafting in Rishikesh" },
+      { "month": "Apr", "temp": "12–27°C", "rainfall": "Low", "crowd": "High", "verdict": "Pleasant weather across hill stations" },
+      { "month": "May", "temp": "15–30°C", "rainfall": "Low", "crowd": "Peak", "verdict": "Chardham Yatra opens" },
+      { "month": "Jun", "temp": "17–30°C", "rainfall": "Moderate", "crowd": "Peak", "verdict": "High season before monsoons" },
+      { "month": "Jul", "temp": "18–26°C", "rainfall": "Heavy", "crowd": "Low", "verdict": "Valley of Flowers blooms" },
+      { "month": "Aug", "temp": "18–26°C", "rainfall": "Heavy", "crowd": "Low", "verdict": "Lush greens; check road updates" },
+      { "month": "Sep", "temp": "14–24°C", "rainfall": "Low", "crowd": "Moderate", "verdict": "Crystal clear Himalayan views" },
+      { "month": "Oct", "temp": "9–20°C", "rainfall": "Zero", "crowd": "High", "verdict": "Trekking in Chopta & Tungnath" },
+      { "month": "Nov", "temp": "4–16°C", "rainfall": "Zero", "crowd": "Moderate", "verdict": "Peaceful chills, temples close for winter" },
+      { "month": "Dec", "temp": "0–12°C", "rainfall": "Snow in peaks", "crowd": "High", "verdict": "Winter holiday vibe in Mussoorie & Nainital" }
+    ],
+    "average_temperature": "18°C",
+    "rainfall_information": "Heavy monsoon from July to mid-August; clear sunny skies in autumn and spring.",
+    "crowd_information": "Peak during May-June and festive holidays.",
+    "price_level": "Budget to Moderate (₹–₹₹)",
+    "ideal_duration": "4 to 7 Days",
+    "currency": "INR (₹)",
+    "languages": ["Hindi", "Garhwali", "Kumaoni", "English"],
+    "culture": "Devbhoomi spiritual rituals, yoga ashrams, folk music, and sacred river veneration.",
+    "people": "Warm-hearted Garhwalis and Kumaonis with profound respect for sacred peaks and pilgrims.",
+    "clothing": "Layered woolens, quick-dry clothes for rafting, and reliable hiking shoes.",
+    "food": "Kafli, Chainsoo, Aloo ke Gutke, Jhangora ki Kheer, Singori sweet, Bal Mithai.",
+    "must_try_foods": ["Aloo ke Gutke with spiced pahadi raita", "Nutritious Kafli spinach curry", "Almora's famous Bal Mithai"],
+    "history": "Ancient sacred corridor traversed by Adi Shankaracharya and spiritual seekers for millennia.",
+    "heritage_story": "Tungnath stands at 12,073 ft as the highest Shiva temple in the world.",
+    "travel_tips": [
+      "Carry motion sickness tablets for winding mountain roads.",
+      "Check weather advisories if planning high-altitude treks like Kedarkantha or Chopta.",
+      "Attend the evening Ganga Aarti at Triveni Ghat in Rishikesh."
+    ],
+    "local_etiquette": [
+      "Alcohol and non-vegetarian food are strictly prohibited in holy river towns like Rishikesh and Haridwar.",
+      "Maintain silence and cleanliness along pilgrim trails."
+    ],
+    "top_attractions": [
+      "Rishikesh Laxman Jhula & River Rafting",
+      "Nainital Naini Lake & Mall Road",
+      "Mussoorie Kempty Falls & Gun Hill",
+      "Jim Corbett Tiger Reserve",
+      "Chopta-Tungnath & Chandrashila Peak"
+    ],
+    "hidden_gems": [
+      "Kanatal peaceful hamlet",
+      "Pangot birdwatching paradise",
+      "Munsiyari base of Panchachuli peaks",
+      "Landour bakehouses and quiet deodar trails"
+    ],
+    "map_coordinates": { "lat": 30.0869, "lng": 78.2676 },
+    "map_markers": [
+      { "name": "Rishikesh Ghats", "type": "Spiritual", "lat": 30.1033, "lng": 78.2948, "desc": "Yoga capital of the world and sacred evening Ganga Aarti" },
+      { "name": "Naini Lake", "type": "Scenic", "lat": 29.3919, "lng": 79.4542, "desc": "Eye-shaped freshwater lake surrounded by pine slopes" },
+      { "name": "Jim Corbett National Park", "type": "Nature", "lat": 29.5300, "lng": 78.7747, "desc": "India's premier tiger reserve and wilderness sanctuary" }
+    ],
+    "activities": ["White water river rafting in Rishikesh", "Bungee jumping at Mohan Chatti", "Jungle safari in Corbett", "Boating on Naini Lake", "Chopta Chandrashila summit trek"],
+    "photo_spots": ["Chandrashila 360-degree Himalayan view", "Laxman Jhula suspension bridge", "Landour Char Dukan", "Naini Lake reflection at dusk"],
+    "faq": [
+      { "q": "When is river rafting open in Rishikesh?", "a": "Rafting is active from mid-September through June, closing only during the peak monsoon season." }
+    ],
+    "related_tour_ids": ["1", "16", "17"],
+    "featured": true,
+    "active": true
+  },
+  {
+    "destination_id": "ladakh",
+    "name": "Ladakh",
+    "country": "India",
+    "region": "Trans-Himalayas",
+    "image": "https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?auto=format&fit=crop&w=1200&q=80",
+    "short_description": "The Land of High Passes: lunar valleys, cobalt Pangong waters, Tibetan gompas & starry galaxies.",
+    "long_story": "A dramatic high-altitude desert framed by snow-glazed peaks, Ladakh is a bucket-list journey for adventure seekers. Cross Khardung La at 17,582 ft, watch the color-shifting waters of Pangong Tso, ride double-humped Bactrian camels across the silver sand dunes of Hunder, and listen to Buddhist monks chanting in clifftop monasteries.",
+    "best_time_to_visit": "May to September",
+    "monthly_weather": [
+      { "month": "May", "temp": "3–16°C", "rainfall": "Zero", "crowd": "Moderate", "verdict": "Season opens, roads clear of snow" },
+      { "month": "Jun", "temp": "7–22°C", "rainfall": "Zero", "crowd": "High", "verdict": "Manali-Leh highway opens, perfect weather" },
+      { "month": "Jul", "temp": "10–26°C", "rainfall": "Low", "crowd": "Peak", "verdict": "Hemis festival & full accessibility" },
+      { "month": "Aug", "temp": "10–25°C", "rainfall": "Low", "crowd": "Peak", "verdict": "Warm sunny days, starry nights" },
+      { "month": "Sep", "temp": "4–20°C", "rainfall": "Zero", "crowd": "Moderate", "verdict": "Autumn colors & crisp clear skies" },
+      { "month": "Oct", "temp": "-2–14°C", "rainfall": "Zero", "crowd": "Low", "verdict": "Freezing begins, passes start closing" }
+    ],
+    "average_temperature": "14°C (Summer)",
+    "rainfall_information": "High altitude rain shadow desert with negligible precipitation; extremely cold winters.",
+    "crowd_information": "High from June to August during biking and road trip season.",
+    "price_level": "Moderate to Premium (₹₹–₹₹₹)",
+    "ideal_duration": "6 to 9 Days",
+    "currency": "INR (₹)",
+    "languages": ["Ladakhi", "Tibetan", "Hindi", "English"],
+    "culture": "Mahayana Buddhism, ancient prayer wheels, monastery festivals with Cham mask dances.",
+    "people": "Gentle, resilient mountain people greeting everyone with heartfelt 'Julley!'.",
+    "clothing": "Thermal inners, windproof jacket, fleece, UV sunglasses, sunscreen SPF 50+, balaclava.",
+    "food": "Thukpa, Momos, Tingmo bread, Butter tea, Chhurpi (yak cheese), Skyu stew.",
+    "must_try_foods": ["Hearty Skyu root vegetable pasta stew", "Hot steamed Tingmo with spicy dip", "Apricot jam and juice from Nubra orchards"],
+    "history": "Ancient kingdom at the crossroad of the Silk Route between India, Tibet, and Central Asia.",
+    "heritage_story": "Thiksey Monastery resembles the Potala Palace of Lhasa, cascading 12 stories up a desert hill.",
+    "travel_tips": [
+      "CRITICAL: Rest and acclimatize for a full 24–48 hours upon landing in Leh.",
+      "Obtain Inner Line Permits (ILP) for Nubra Valley, Pangong, and Hanle.",
+      "Stay hydrated: drink 3–4 liters of water daily to prevent AMS."
+    ],
+    "local_etiquette": [
+      "Always walk clockwise around monasteries, stupas, and mani stones.",
+      "Ask permission before photographing monks in prayer."
+    ],
+    "top_attractions": [
+      "Pangong Tso Lake",
+      "Nubra Valley & Hunder Sand Dunes",
+      "Khardung La Pass (17,582 ft)",
+      "Thiksey & Diskit Monasteries",
+      "Magnetic Hill & Sangam of Indus and Zanskar"
+    ],
+    "hidden_gems": [
+      "Tso Moriri high-altitude saline lake",
+      "Hanle Dark Sky Reserve for stargazing",
+      "Turtuk village (Balti culture on border)",
+      "Basgo Fortress ruins"
+    ],
+    "map_coordinates": { "lat": 34.1526, "lng": 77.5771 },
+    "map_markers": [
+      { "name": "Leh Palace", "type": "Heritage", "lat": 34.1663, "lng": 77.5847, "desc": "17th-century former royal palace overlooking Leh town" },
+      { "name": "Pangong Tso", "type": "Scenic", "lat": 33.7595, "lng": 78.6674, "desc": "Endorheic lake famous for shifting shades of blue" },
+      { "name": "Khardung La", "type": "Adventure", "lat": 34.2787, "lng": 77.6047, "desc": "Legendary mountain pass connecting Leh to Nubra Valley" }
+    ],
+    "activities": ["Bactrian camel ride in Hunder", "Stargazing at Pangong / Hanle", "River rafting in Zanskar canyon", "Biking across high passes", "Monastery meditation morning"],
+    "photo_spots": ["Pangong Lake shoreline", "Diskit Maitreya Buddha statue against desert", "Sangam confluence viewpoint", "Khardung La landmark yellow milestone"],
+    "faq": [
+      { "q": "How to handle altitude sickness in Ladakh?", "a": "Rest the entire first day in Leh, drink plenty of water, avoid alcohol and smoking, and carry Diamox if advised by your physician." }
+    ],
+    "related_tour_ids": ["18", "19", "20"],
+    "featured": true,
+    "active": true
+  },
+  {
+    "destination_id": "dubai",
+    "name": "Dubai",
+    "country": "United Arab Emirates",
+    "region": "Middle East",
+    "image": "https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=1200&q=80",
+    "short_description": "Futuristic skyline, golden Arabian desert dunes, mega-malls, luxury yachts & world-record wonders.",
+    "long_story": "Rising like a glittering metropolis from golden desert sands, Dubai is a masterclass in modern ambition. Stand atop the Burj Khalifa at 828 meters, conquer sweeping desert dunes in a 4x4, cruise the sparkling Dubai Marina aboard a luxury yacht, and immerse yourself in high-tech spectacles from the Museum of the Future to the Dubai Mall fountains.",
+    "best_time_to_visit": "November to March",
+    "monthly_weather": [
+      { "month": "Jan", "temp": "15–24°C", "rainfall": "Low", "crowd": "Peak", "verdict": "Dubai Shopping Festival, ideal climate" },
+      { "month": "Feb", "temp": "16–25°C", "rainfall": "Low", "crowd": "High", "verdict": "Pleasant beach days and outdoor dining" },
+      { "month": "Mar", "temp": "18–29°C", "rainfall": "Low", "crowd": "High", "verdict": "Warm sunny beach holidays" },
+      { "month": "Apr", "temp": "22–33°C", "rainfall": "Zero", "crowd": "Moderate", "verdict": "Warming up, pool parties" },
+      { "month": "May", "temp": "26–38°C", "rainfall": "Zero", "crowd": "Low", "verdict": "Indoor theme parks & air-conditioned luxury" },
+      { "month": "Jun", "temp": "28–40°C", "rainfall": "Zero", "crowd": "Low", "verdict": "Great hotel discount rates" },
+      { "month": "Jul", "temp": "31–42°C", "rainfall": "Zero", "crowd": "Low", "verdict": "Summer surprises & indoor attractions" },
+      { "month": "Aug", "temp": "32–43°C", "rainfall": "Zero", "crowd": "Low", "verdict": "Deep summer sales" },
+      { "month": "Sep", "temp": "28–39°C", "rainfall": "Zero", "crowd": "Moderate", "verdict": "Late summer transition" },
+      { "month": "Oct", "temp": "24–35°C", "rainfall": "Zero", "crowd": "Moderate", "verdict": "Outdoor season re-opens" },
+      { "month": "Nov", "temp": "20–31°C", "rainfall": "Low", "crowd": "High", "verdict": "Formula 1 & outdoor events kick off" },
+      { "month": "Dec", "temp": "17–26°C", "rainfall": "Low", "crowd": "Peak", "verdict": "Iconic NYE fireworks & winter festivals" }
+    ],
+    "average_temperature": "28°C",
+    "rainfall_information": "Arid desert climate with very minimal rain, mostly concentrated in January-February.",
+    "crowd_information": "Extremely high during December-January (Shopping Festival & New Year).",
+    "price_level": "Premium to Luxury (₹₹₹–₹₹₹₹)",
+    "ideal_duration": "4 to 6 Days",
+    "currency": "AED (Dirham)",
+    "languages": ["Arabic", "English", "Hindi", "Urdu"],
+    "culture": "Modern cosmopolitan hub rooted in Emirati bedouin traditions and Islamic values.",
+    "people": "A global melting pot with over 200 nationalities living and working harmoniously.",
+    "clothing": "Modest casual wear in malls and public spaces; swimwear acceptable at hotel pools and private beaches.",
+    "food": "Shawarma, Al Machboos, Luqaimat, Hummus & Falafel, Kunafa, Camel milk gelato.",
+    "must_try_foods": ["Warm crispy Luqaimat with date syrup", "Slow-cooked spiced Al Machboos rice", "Stretching Turkish ice cream & cheesy Kunafa"],
+    "history": "Evolved from an 18th-century pearl-diving fishing village on Dubai Creek into a global aviation and business titan.",
+    "heritage_story": "Al Fahidi Historical District showcases traditional wind towers (barjeels) that provided natural desert AC.",
+    "travel_tips": [
+      "Use the clean Dubai Metro to travel seamlessly between airport, malls, and marina.",
+      "Pre-book Burj Khalifa At The Top sunset slots for unforgettable skyline views.",
+      "Carry an international travel card or credit card for hassle-free cashless payments."
+    ],
+    "local_etiquette": [
+      "Dress respectfully when visiting public government buildings and mosques.",
+      "Public displays of affection should be kept modest."
+    ],
+    "top_attractions": [
+      "Burj Khalifa & Dubai Mall Fountains",
+      "Desert Safari with Dune Bashing & BBQ",
+      "Dubai Marina & JBR Beach Walk",
+      "Museum of the Future",
+      "Palm Jumeirah & Atlantis Aquaventure"
+    ],
+    "hidden_gems": [
+      "Al Seef historic waterfront promenade",
+      "Hatta mountain dam kayaking",
+      "Ras Al Khor flamingo wildlife sanctuary",
+      "Miracle Garden floral sculptures"
+    ],
+    "map_coordinates": { "lat": 25.2048, "lng": 55.2708 },
+    "map_markers": [
+      { "name": "Burj Khalifa", "type": "Sightseeing", "lat": 25.1972, "lng": 55.2744, "desc": "Tallest building on the planet at 828 meters" },
+      { "name": "Dubai Marina", "type": "Scenic", "lat": 25.0805, "lng": 55.1403, "desc": "Stunning skyscraper-lined canal with luxury yachts and dining" },
+      { "name": "Museum of the Future", "type": "Culture", "lat": 25.2253, "lng": 55.2818, "desc": "Architectural masterpiece inscribed with Arabic calligraphy" }
+    ],
+    "activities": ["Dune bashing in the Lahbab desert", "Skydiving over Palm Jumeirah", "Yacht cruise at sunset", "Shopping at gold and spice souks", "Aquaventure waterpark slides"],
+    "photo_spots": ["Burj Khalifa fountain bridge", "Museum of the Future torus exterior", "The View at the Palm", "Desert dunes during golden hour"],
+    "faq": [
+      { "q": "Do Indians need a visa for Dubai?", "a": "Yes, tourist e-visas can be obtained in 2–3 working days, or Indian passport holders with valid US/UK/Schengen visas get visa-on-arrival." }
+    ],
+    "related_tour_ids": ["21", "22", "23"],
+    "featured": true,
+    "active": true
+  },
+  {
+    "destination_id": "bali",
+    "name": "Bali",
+    "country": "Indonesia",
+    "region": "Southeast Asia",
+    "image": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=80",
+    "short_description": "Island of the Gods: emerald rice terraces, cliffside temples, bohemian beach clubs & spiritual wellness.",
+    "long_story": "Bali enchants travellers with its unique blend of spiritual serenity, lush volcanic jungles, and pulsating coastal energy. Swing over rice terraces in Ubud, watch Kecak fire dancers chant as the sun dips behind Uluwatu cliff temple, and sip coconuts at world-famous beach clubs in Canggu and Seminyak.",
+    "best_time_to_visit": "April to October (Dry Season)",
+    "monthly_weather": [
+      { "month": "Jan", "temp": "24–30°C", "rainfall": "Heavy", "crowd": "Moderate", "verdict": "Wet season, lush jungles & waterfalls" },
+      { "month": "Feb", "temp": "24–30°C", "rainfall": "Heavy", "crowd": "Low", "verdict": "Great deals on luxury private pool villas" },
+      { "month": "Mar", "temp": "24–31°C", "rainfall": "Moderate", "crowd": "Moderate", "verdict": "Nyepi (Day of Silence) cultural wonder" },
+      { "month": "Apr", "temp": "24–32°C", "rainfall": "Low", "crowd": "Moderate", "verdict": "Dry season arrives, sunny beach weather" },
+      { "month": "May", "temp": "23–31°C", "rainfall": "Low", "crowd": "High", "verdict": "Clear turquoise waters & surfing" },
+      { "month": "Jun", "temp": "22–30°C", "rainfall": "Low", "crowd": "High", "verdict": "Pleasant breezes, ideal for exploring" },
+      { "month": "Jul", "temp": "22–29°C", "rainfall": "Low", "crowd": "Peak", "verdict": "Best weather of the year, cool evenings" },
+      { "month": "Aug", "temp": "22–29°C", "rainfall": "Low", "crowd": "Peak", "verdict": "Kite festival season, sunny and dry" },
+      { "month": "Sep", "temp": "23–30°C", "rainfall": "Low", "crowd": "High", "verdict": "Less crowded, superb diving conditions" },
+      { "month": "Oct", "temp": "24–31°C", "rainfall": "Low", "crowd": "Moderate", "verdict": "Warm and pleasant before rainy season" },
+      { "month": "Nov", "temp": "24–31°C", "rainfall": "Moderate", "crowd": "Moderate", "verdict": "Brief afternoon tropical showers" },
+      { "month": "Dec", "temp": "24–30°C", "rainfall": "Heavy", "crowd": "Peak", "verdict": "Festive season parties in Canggu & Uluwatu" }
+    ],
+    "average_temperature": "27°C",
+    "rainfall_information": "Tropical monsoon from November to March; sunny dry season with low humidity from April to October.",
+    "crowd_information": "Peak during July-August and Christmas/New Year.",
+    "price_level": "Moderate (₹₹)",
+    "ideal_duration": "5 to 8 Days",
+    "currency": "IDR (Indonesian Rupiah)",
+    "languages": ["Balinese", "Indonesian", "English"],
+    "culture": "Balinese Hinduism, daily Canang Sari floral offerings, gamelan music, and temple pageantry.",
+    "people": "Extraordinarily gentle, artistic, and hospitable locals welcoming travellers with a warm smile.",
+    "clothing": "Tropical breathable clothes, beachwear, sarong for temple visits (often rented at gates).",
+    "food": "Nasi Goreng, Mie Goreng, Satay with peanut sauce, Gado Gado, Babi Guling, Pisang Goreng.",
+    "must_try_foods": ["Crispy Balinese Duck (Bebek Betutu)", "Indonesian Satay skewers fresh off charcoal", "Açai smoothie bowls in trendy Ubud cafes"],
+    "history": "Century-old Hindu-Buddhist kingdoms that developed intricate Subak irrigation cooperative systems.",
+    "heritage_story": "Tegallalang rice terraces use the UNESCO-inscribed 9th-century Subak water sharing network.",
+    "travel_tips": [
+      "Rent a scooter in Canggu/Ubud only if you are an experienced rider; otherwise use Grab or private drivers.",
+      "Take a speedboat day-trip to Nusa Penida to see Kelingking T-Rex beach.",
+      "Carry Indonesian Rupiah cash for street warungs and entrance tickets."
+    ],
+    "local_etiquette": [
+      "Never step on the small floral Canang Sari offerings placed on pavements and doorsteps.",
+      "Wear a sarong and sash whenever entering temple grounds."
+    ],
+    "top_attractions": [
+      "Uluwatu Temple & Sunset Kecak Dance",
+      "Tegallalang Rice Terraces & Bali Swing",
+      "Nusa Penida Island (Kelingking Beach & Broken Beach)",
+      "Tanah Lot sea temple",
+      "Mount Batur Sunrise Trek"
+    ],
+    "hidden_gems": [
+      "Sidemen valley rural tranquility",
+      "Tibumana & Tukad Cepung hidden cave waterfalls",
+      "Amed black sand beach coral reefs",
+      "Jatiluwih vast UNESCO terraces"
+    ],
+    "map_coordinates": { "lat": -8.4095, "lng": 115.1889 },
+    "map_markers": [
+      { "name": "Uluwatu Temple", "type": "Heritage", "lat": -8.8291, "lng": 115.0849, "desc": "Cliffside temple perched 70 meters above roaring surf" },
+      { "name": "Tegallalang Rice Terraces", "type": "Nature", "lat": -8.4312, "lng": 115.2796, "desc": "Iconic stepped emerald rice paddies in Ubud" },
+      { "name": "Tanah Lot", "type": "Spiritual", "lat": -8.6212, "lng": 115.0868, "desc": "Ancient offshore rock temple surrounded by crashing ocean waves" }
+    ],
+    "activities": ["Mount Batur active volcano sunrise hike", "Surfing lessons at Kuta / Canggu", "Balinese floral bath & spa massage", "Snorkeling with manta rays at Nusa Penida", "Infinity pool club day at Cretya Ubud"],
+    "photo_spots": ["Kelingking Beach T-Rex viewpoint", "Bali Swing high over jungle canopy", "Handara Golf Gate", "Lempuyang Temple Gates of Heaven"],
+    "faq": [
+      { "q": "Do Indians get Visa on Arrival in Bali?", "a": "Yes, Indian passport holders get an easy Visa on Arrival (e-VOA) for 30 days at Ngurah Rai International Airport." }
+    ],
+    "related_tour_ids": ["24", "25", "26"],
+    "featured": true,
+    "active": true
+  }
+]
