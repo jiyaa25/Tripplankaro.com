@@ -14,7 +14,6 @@ import {
   Share2,
   Heart,
   ChevronRight,
-  Scale,
   Sparkles
 } from 'lucide-react';
 import { generateTourWhatsAppMessage, openWhatsApp } from '../utils/whatsapp';
@@ -26,9 +25,7 @@ export default function TourDetailModal({
   onOpenSplitter,
   onOpenCalculator,
   isSaved,
-  onToggleSave,
-  isCompared,
-  onToggleCompare
+  onToggleSave
 }) {
   const [activeTab, setActiveTab] = useState('itinerary'); // 'itinerary', 'inclusions', 'photos', 'book'
   const [selectedDayIndex, setSelectedDayIndex] = useState(0);
@@ -170,26 +167,6 @@ Please check availability and connect with me!`;
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            {onToggleCompare && (
-              <button
-                onClick={() => onToggleCompare(tour)}
-                title={isCompared ? "Remove from comparison" : "Compare this tour"}
-                style={{
-                  background: isCompared ? 'var(--coral-primary)' : 'rgba(255, 255, 255, 0.08)',
-                  border: '1px solid var(--border-color)',
-                  width: '36px',
-                  height: '36px',
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#fff',
-                  cursor: 'pointer'
-                }}
-              >
-                <Scale size={17} />
-              </button>
-            )}
             <button
               onClick={() => onToggleSave(tour)}
               title={isSaved ? "Saved in wishlist" : "Save trip"}

@@ -1,6 +1,29 @@
-import React from 'react';
-import { X, Heart, Trash2, ArrowRight, MessageCircle, Share2, Calculator, Scale, Eye } from 'lucide-react';
+import React, { useState } from 'react';
+import { X, Heart, Trash2, ArrowRight, MessageCircle, Share2, Calculator, Eye } from 'lucide-react';
 import { generateTourWhatsAppMessage, openWhatsApp, createWhatsAppLink } from '../utils/whatsapp';
+import { getTourImage } from '../utils/imageFallback';
+
+function WishlistThumbnail({ tour, size = 74 }) {
+  const resolved = getTourImage(tour.image, tour.destination);
+  const [src, setSrc] = useState(resolved);
+
+  return (
+    <img
+      src={src}
+      alt={tour.tour_name}
+      onError={() => setSrc(getTourImage(null, tour.destination))}
+      loading="lazy"
+      style={{
+        width: `${size}px`,
+        height: `${size}px`,
+        borderRadius: size > 50 ? 'var(--radius-sm)' : '6px',
+        objectFit: 'cover',
+        flexShrink: 0,
+        backgroundColor: '#1f2937'
+      }}
+    />
+  );
+}
 
 export default function WishlistDrawer({
   isOpen,
@@ -8,9 +31,7 @@ export default function WishlistDrawer({
   savedTours = [],
   onRemoveTour,
   onOpenDetails,
-  onOpenSplitter,
   onOpenCalculator,
-  onOpenCompare,
   recentlyViewed = []
 }) {
   if (!isOpen) return null;
@@ -115,24 +136,15 @@ Can you help us plan and check upcoming dates for these?`;
                   style={{
                     display: 'flex',
                     gap: '12px',
-                    background: 'rgba(255, 255, 255, 0.03)',
+                    background: 'var(--bg-card)',
                     borderRadius: 'var(--radius-md)',
                     padding: '12px',
                     border: '1px solid var(--border-color)',
-                    position: 'relative'
+                    position: 'relative',
+                    boxShadow: 'var(--shadow-sm)'
                   }}
                 >
-                  <img
-                    src={t.image}
-                    alt={t.tour_name}
-                    style={{
-                      width: '74px',
-                      height: '74px',
-                      borderRadius: 'var(--radius-sm)',
-                      objectFit: 'cover',
-                      flexShrink: 0
-                    }}
-                  />
+                  <WishlistThumbnail tour={t} size={74} />
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ fontSize: '0.7rem', color: 'var(--coral-primary)', fontWeight: 800, textTransform: 'uppercase' }}>
                       {t.destination} • {t.duration_short}
@@ -210,14 +222,14 @@ Can you help us plan and check upcoming dates for these?`;
                       gap: '10px',
                       padding: '8px 10px',
                       borderRadius: 'var(--radius-sm)',
-                      background: 'rgba(255,255,255,0.02)',
+                      background: 'var(--bg-card)',
                       cursor: 'pointer',
-                      border: '1px solid transparent'
+                      border: '1px solid var(--border-color)'
                     }}
-                    onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--border-color)'}
-                    onMouseLeave={e => e.currentTarget.style.borderColor = 'transparent'}
+                    onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--coral-primary)'}
+                    onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border-color)'}
                   >
-                    <img src={r.image} alt={r.tour_name} style={{ width: '40px', height: '40px', borderRadius: '6px', objectFit: 'cover' }} />
+                    <WishlistThumbnail tour={r} size={42} />
                     <div style={{ minWidth: 0, flex: 1 }}>
                       <div style={{ fontSize: '0.82rem', fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                         {r.tour_name}
@@ -238,33 +250,39 @@ Can you help us plan and check upcoming dates for these?`;
           <div style={{
             padding: '18px 20px',
             borderTop: '1px solid var(--border-color)',
-            background: 'rgba(0,0,0,0.15)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '10px'
+            background: 'var(--bg-card)'
           }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Combined Estimate:</span>
-              <span style={{ fontSize: '1.3rem', fontWeight: 900, color: 'var(--coral-primary)' }}>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginBottom: '14px'
+            }}>
+              <div>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Combined Estimate:</div>
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Per person approx</div>
+              </div>
+              <div style={{ fontSize: '1.4rem', fontWeight: 900, color: 'var(--coral-primary)' }}>
                 ₹{totalEstimate.toLocaleString('en-IN')}
-              </span>
+              </div>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: '10px' }}>
               <button
                 onClick={handleWhatsAppWishlist}
                 className="gradient-btn"
-                style={{ padding: '10px', fontSize: '0.82rem', justifyContent: 'center' }}
+                style={{ padding: '12px', fontSize: '0.88rem' }}
               >
-                <MessageCircle size={15} />
+                <MessageCircle size={16} />
                 <span>Enquire All on WA</span>
               </button>
+
               <button
                 onClick={handleShareWishlist}
                 className="secondary-btn"
-                style={{ padding: '10px', fontSize: '0.82rem', justifyContent: 'center' }}
+                style={{ padding: '12px', fontSize: '0.88rem' }}
               >
-                <Share2 size={15} />
+                <Share2 size={16} />
                 <span>Share List</span>
               </button>
             </div>

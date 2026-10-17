@@ -112,6 +112,21 @@ export function filterAndSortTours(tours, {
         return (b.pricing?.discount_percent || 0) - (a.pricing?.discount_percent || 0);
       case 'recommended':
       default:
+        // When user searched for something, prioritize exact/direct destination and title matches first!
+        if (query) {
+          const score = (t) => {
+            let s = 0;
+            const dest = t.destination?.toLowerCase() || '';
+            const name = t.tour_name?.toLowerCase() || '';
+            if (dest === query) s += 100;
+            else if (dest.includes(query)) s += 50;
+            if (name.includes(query)) s += 30;
+            return s;
+          };
+          const scoreDiff = score(b) - score(a);
+          if (scoreDiff !== 0) return scoreDiff;
+        }
+
         // Featured first, then rating
         return ((b.featured ? 1 : 0) - (a.featured ? 1 : 0)) || (ratingB - ratingA);
     }

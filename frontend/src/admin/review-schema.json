@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ReviewItem",
+  "description": "Schema for Tripplankaro traveler reviews uploaded by Admin (matching Google Form submission)",
+  "type": "object",
+  "required": [
+    "name",
+    "destination",
+    "review"
+  ],
+  "properties": {
+    "review_id": {
+      "type": "string",
+      "description": "Unique identifier (auto-generated if omitted e.g. 'rev-admin-01')"
+    },
+    "title": {
+      "type": "string",
+      "description": "Headline or short title of the review e.g. 'Overall Tripplankaro Did an Excellent Job'"
+    },
+    "name": {
+      "type": "string",
+      "description": "Traveler or couple name from Google Form (e.g. 'Mr. Sagar Savsani' or 'Kavita & Amit Saxena')"
+    },
+    "destination": {
+      "type": "string",
+      "description": "Destination visited (e.g. 'Central Europe', 'Switzerland', 'Kashmir', 'Goa', 'Dubai')"
+    },
+    "month_year": {
+      "type": "string",
+      "description": "Month of travel badge e.g. 'Jun', 'Oct', 'March 2026'"
+    },
+    "trip_type": {
+      "type": "string",
+      "description": "Type of trip e.g. 'Individual Tour', 'Group Tour', 'Honeymoon Tour', 'Family Vacation'",
+      "default": "Individual Tour"
+    },
+    "rating": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 5,
+      "default": 5
+    },
+    "review": {
+      "type": "string",
+      "description": "Overall Experience & Highlights from the Google Form"
+    },
+    "photos": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "2-3 Photos or video URLs uploaded by user in Google Form. The first photo is displayed on the card."
+    },
+    "image": {
+      "type": "string",
+      "description": "Primary photo URL (auto-synced with photos[0] if omitted)"
+    },
+    "whatsapp_number": {
+      "type": "string",
+      "description": "Traveler WhatsApp number (stored securely in admin record, not displayed publicly)"
+    },
+    "email": {
+      "type": "string",
+      "description": "Traveler Email address (stored securely in admin record, not displayed publicly)"
+    },
+    "verified": {
+      "type": "boolean",
+      "default": true
+    },
+    "featured": {
+      "type": "boolean",
+      "default": true
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

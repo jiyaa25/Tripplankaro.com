@@ -1,0 +1,101 @@
+{
+  "tour_name": "Royal Rajasthan Forts & Palaces – 5N/6D",
+  "destination": "Rajasthan",
+  "country": "India",
+  "state": "Rajasthan",
+  "city": "Jaipur",
+  "tour_type": "Domestic",
+  "tags": ["Heritage", "Royal Palaces", "Couples & Family", "Cultural"],
+  "vibes": ["#RoyalVibes", "#InstaWorthy", "#DesertMagic"],
+  "travel_styles": ["Sightseeing & Culture", "Heritage Walk"],
+  "suitable_for": ["Couples", "Family", "Friends"],
+  "duration": {
+    "days": 6,
+    "nights": 5,
+    "text": "6D / 5N"
+  },
+  "pricing": {
+    "currency": "INR",
+    "original_price_num": 28000,
+    "discounted_price_num": 23500,
+    "per_person": true
+  },
+  "group_size": "2-12 persons",
+  "hotel": {
+    "category": "4-Star Heritage Haveli",
+    "name": "Heritage Stays in Jaipur & Jodhpur",
+    "room_type": "Royal Deluxe Room"
+  },
+  "transport": "Private AC Sedan / Ertiga for all transfers and sightseeing",
+  "image": "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1200&q=80",
+  "gallery_images": [
+    "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1606293926075-69a00dbfde81?auto=format&fit=crop&w=1000&q=80",
+    "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1000&q=80"
+  ],
+  "overview": "Experience the grandeur of the Maharajas with this 6-day heritage escapade through the Pink City of Jaipur and the Blue City of Jodhpur. Enjoy royal palace visits, majestic hilltop fort tours, lively bazaars, and traditional Rajasthani dinners.",
+  "highlights": [
+    "Stay in handpicked heritage Havelis with daily royal breakfast & dinner.",
+    "Guided tour of Amer Fort with elephant/jeep ride view.",
+    "Evening folk dance show and traditional dinner under the desert sky.",
+    "Private dedicated chauffeur driven AC cab throughout the trip."
+  ],
+  "included": [
+    "5 Nights accommodation in 4-Star Heritage Haveli stays",
+    "Daily breakfast and dinner (MAP plan)",
+    "Private AC vehicle for all airport/station transfers and sightseeing",
+    "Driver allowance, toll taxes, parking, and state permit charges"
+  ],
+  "excluded": [
+    "Flight / train tickets to Jaipur",
+    "Monument entry tickets and camera fees",
+    "Personal expenses like laundry, room service, or tips"
+  ],
+  "itinerary": [
+    {
+      "day": 1,
+      "title": "Arrival in Jaipur & City Palace Exploration",
+      "description": "Welcome to Jaipur! Meet our representative at the airport/railway station and check into your heritage stay. In the afternoon, visit the iconic City Palace, Jantar Mantar observatory, and click photos at the world-famous Hawa Mahal facade. Relax in the evening at the hotel.",
+      "image": "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "day": 2,
+      "title": "Amer Fort, Jaigarh & Nahargarh Sunset",
+      "description": "After breakfast, head to Amer Fort perched on the Aravalli hills with its stunning Sheesh Mahal (Mirror Palace). Explore Jaigarh Fort housing the world's largest cannon on wheels. Catch a magical sunset overlooking the entire pink city from Nahargarh Fort.",
+      "image": "https://images.unsplash.com/photo-1606293926075-69a00dbfde81?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "day": 3,
+      "title": "Drive to Jodhpur – The Sun & Blue City",
+      "description": "Enjoy a scenic drive to Jodhpur (approx 5.5 hours). Check into your stay and stroll through the iconic blue painted alleyways of Navchokiya. Witness the clock tower and vibrant Sardar Market in the evening.",
+      "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "day": 4,
+      "title": "Mehrangarh Fort & Jaswant Thada",
+      "description": "Visit one of India's largest and most magnificent forts — Mehrangarh Fort. Admire the marble cenotaph at Jaswant Thada, and discover the grand art-deco architecture of Umaid Bhawan Palace.",
+      "image": "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "day": 5,
+      "title": "Bishnoi Village Safari & Desert Sunset",
+      "description": "Embark on an authentic rural safari to meet local Bishnoi artisans, potters, and weavers. Experience genuine hospitality, spotting blackbucks in the wild, followed by a royal dinner with folk music.",
+      "image": "https://images.unsplash.com/photo-1606293926075-69a00dbfde81?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "day": 6,
+      "title": "Departure from Jodhpur with Royal Memories",
+      "description": "Relish a hearty breakfast, pack your souvenirs, and check out. Our driver will drop you at Jodhpur Airport or Railway Station for your return journey.",
+      "image": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=800&q=80"
+    }
+  ],
+  "pickup_location": "Jaipur International Airport / Railway Station",
+  "drop_location": "Jodhpur Airport / Railway Station",
+  "best_time": "October to March",
+  "difficulty": "Easy",
+  "rating": 4.9,
+  "review_count": 28,
+  "featured": true,
+  "trending": true,
+  "active": true
+}

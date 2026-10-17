@@ -1,0 +1,153 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TourPackage",
+  "description": "Schema for Tripplankaro tour packages added by Admin",
+  "type": "object",
+  "required": [
+    "tour_name",
+    "destination",
+    "tour_type",
+    "duration",
+    "pricing"
+  ],
+  "properties": {
+    "tour_id": {
+      "type": "string",
+      "description": "Unique identifier (auto-generated if omitted or format like 'tour-custom-01')"
+    },
+    "tour_name": {
+      "type": "string",
+      "description": "Display name of the tour package (e.g. 'Royal Rajasthan Heritage Tour – 5N/6D')"
+    },
+    "slug": {
+      "type": "string",
+      "description": "URL friendly slug (e.g. 'royal-rajasthan-heritage-tour-5n6d'). Auto-generated if omitted."
+    },
+    "destination": {
+      "type": "string",
+      "description": "Primary destination name (e.g. 'Rajasthan', 'Goa', 'Dubai', 'Bali')"
+    },
+    "country": {
+      "type": "string",
+      "default": "India"
+    },
+    "state": {
+      "type": "string",
+      "description": "State or region (e.g. 'Rajasthan')"
+    },
+    "city": {
+      "type": "string",
+      "description": "Primary base city (e.g. 'Jaipur')"
+    },
+    "tour_type": {
+      "type": "string",
+      "enum": ["Domestic", "International", "Theme Tour"],
+      "description": "Category for filtering across Domestic, International, or Theme Tours"
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Keywords or badges e.g. ['Best Seller', 'Couple Friendly', 'Heritage']"
+    },
+    "vibes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Vibe tags with # e.g. ['#RoyalVibes', '#InstaWorthy', '#DesertSafari']"
+    },
+    "travel_styles": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Styles e.g. ['Sightseeing & Culture', 'Relaxed Vacation']"
+    },
+    "suitable_for": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Audience e.g. ['Couples', 'Family', 'Friends', 'Solo Travellers']"
+    },
+    "duration": {
+      "type": "object",
+      "required": ["days", "nights"],
+      "properties": {
+        "days": { "type": "integer", "minimum": 1 },
+        "nights": { "type": "integer", "minimum": 0 },
+        "text": { "type": "string", "description": "e.g. '6D / 5N'" }
+      }
+    },
+    "pricing": {
+      "type": "object",
+      "required": ["discounted_price_num"],
+      "properties": {
+        "currency": { "type": "string", "default": "INR" },
+        "original_price_num": { "type": "number", "description": "Regular price in numbers e.g. 25000" },
+        "discounted_price_num": { "type": "number", "description": "Selling discounted price e.g. 19999" },
+        "per_person": { "type": "boolean", "default": true }
+      }
+    },
+    "group_size": {
+      "type": "string",
+      "description": "e.g. '2-12 persons' or 'Flexible'"
+    },
+    "hotel": {
+      "type": "object",
+      "properties": {
+        "category": { "type": "string", "description": "e.g. '3-Star / 4-Star Handpicked Resorts'" },
+        "name": { "type": "string" },
+        "room_type": { "type": "string", "default": "Double / Twin Sharing" }
+      }
+    },
+    "transport": {
+      "type": "string",
+      "description": "e.g. 'Private AC Sedan / SUV for transfers & sightseeing'"
+    },
+    "image": {
+      "type": "string",
+      "description": "Main banner image URL (Unsplash or direct image link)"
+    },
+    "gallery_images": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of 2 to 6 additional photo URLs"
+    },
+    "overview": {
+      "type": "string",
+      "description": "Short compelling overview of the trip"
+    },
+    "highlights": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Key bullet points of what makes this tour special"
+    },
+    "included": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of inclusions (Hotel, Breakfast, Cab, etc.)"
+    },
+    "excluded": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of exclusions (Flight, Personal expenses, etc.)"
+    },
+    "itinerary": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["day", "title", "description"],
+        "properties": {
+          "day": { "type": "integer" },
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "image": { "type": "string" }
+        }
+      }
+    },
+    "pickup_location": { "type": "string" },
+    "drop_location": { "type": "string" },
+    "best_time": { "type": "string", "description": "e.g. 'October to March'" },
+    "difficulty": { "type": "string", "enum": ["Easy", "Moderate", "Challenging"], "default": "Easy" },
+    "rating": { "type": "number", "default": 4.8 },
+    "review_count": { "type": "integer", "default": 12 },
+    "featured": { "type": "boolean", "default": false },
+    "trending": { "type": "boolean", "default": false },
+    "active": { "type": "boolean", "default": true }
+  }
+}

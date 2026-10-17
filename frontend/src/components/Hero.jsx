@@ -1,352 +1,426 @@
-import React from 'react';
-import { Search, MapPin, Sparkles, ShieldCheck, Clock, Users, ArrowRight, Globe, Home, Compass } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Search, MapPin, Calendar, Users, ChevronLeft, ChevronRight } from 'lucide-react';
 
-const PHONE = '+916353731027';
+const HERO_SLIDES = [
+  {
+    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=80',
+    subtitle: "Let's Explore The World",
+    titleLine1: "Your World. Your Journey.",
+    titleLine2: "We Plan, You Enjoy.",
+    desc: "From tropical escapes to unforgettable city adventures, discover thoughtfully crafted holidays designed around you."
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2000&q=80',
+    subtitle: "Breathtaking Mountain Escapes",
+    titleLine1: "Majestic Peaks & Serene Valleys.",
+    titleLine2: "We Plan, You Enjoy.",
+    desc: "Unwind among snow-capped Himalayas, scenic trails, and cozy mountain retreats curated for genuine tranquility."
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=2000&q=80',
+    subtitle: "International Wonders & Skylines",
+    titleLine1: "Iconic Cities. Golden Sunsets.",
+    titleLine2: "We Plan, You Enjoy.",
+    desc: "Handcrafted international getaways with zero hidden charges, seamless luxury stays, and 24/7 dedicated support."
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2000&q=80',
+    subtitle: "Tropical Beaches & Island Vibes",
+    titleLine1: "Turquoise Waters. Carefree Days.",
+    titleLine2: "We Plan, You Enjoy.",
+    desc: "Escape to Andaman, Bali, Maldives, and Thailand with bespoke beach itineraries and private island excursions."
+  }
+];
+
+const MONTHS = [
+  'Select Month', 'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'
+];
 
 export default function Hero({
   searchQuery,
   setSearchQuery,
-  activeCategory,
-  setActiveCategory,
   onQuickSearch,
-  totalTours
+  onSearchSubmit
 }) {
-  const trendingTags = ['Goa', 'Ladakh', 'Manali', 'Dubai', 'Thailand', 'Kashmir', 'Uttarakhand', 'Bali'];
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [selectedMonth, setSelectedMonth] = useState('Select Month');
+  const [travellerCount, setTravellerCount] = useState('2 Travellers');
+
+  // Auto rotate background every 6 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide(prev => (prev + 1) % HERO_SLIDES.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const prevSlide = () => {
+    setCurrentSlide(prev => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
+  };
+
+  const nextSlide = () => {
+    setCurrentSlide(prev => (prev + 1) % HERO_SLIDES.length);
+  };
+
+  const handleSearch = () => {
+    if (onSearchSubmit) {
+      onSearchSubmit({
+        destination: searchQuery,
+        month: selectedMonth,
+        travellers: travellerCount
+      });
+    }
+  };
 
   return (
     <section style={{
       position: 'relative',
-      padding: '70px 0 50px 0',
+      minHeight: '560px',
+      height: '68vh',
+      maxHeight: '680px',
       overflow: 'hidden',
-      borderBottom: '1px solid var(--border-color)'
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: '#fff',
+      backgroundColor: '#0a101d'
     }}>
-      {/* Background glow effects */}
-      <div style={{
-        position: 'absolute',
-        top: '-15%',
-        left: '20%',
-        width: '450px',
-        height: '450px',
-        borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(255,56,92,0.18) 0%, rgba(255,56,92,0) 70%)',
-        filter: 'blur(60px)',
-        zIndex: 0,
-        pointerEvents: 'none'
-      }} />
-      <div style={{
-        position: 'absolute',
-        top: '10%',
-        right: '15%',
-        width: '400px',
-        height: '400px',
-        borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(139,92,246,0.15) 0%, rgba(139,92,246,0) 70%)',
-        filter: 'blur(70px)',
-        zIndex: 0,
-        pointerEvents: 'none'
-      }} />
-
-      <div className="container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
-        {/* Brand Tagline Badge */}
-        <div style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '8px',
-          padding: '6px 16px',
-          borderRadius: 'var(--radius-full)',
-          background: 'rgba(255, 56, 92, 0.12)',
-          border: '1px solid rgba(255, 56, 92, 0.3)',
-          color: '#ff5274',
-          fontWeight: 700,
-          fontSize: '0.85rem',
-          marginBottom: '20px'
-        }}>
-          <Sparkles size={16} />
-          <span>tripplankaro.com — We Plan, You Enjoy</span>
-          <span style={{
-            background: 'var(--coral-primary)',
-            color: '#fff',
-            fontSize: '0.68rem',
-            padding: '2px 8px',
-            borderRadius: '10px'
-          }}>
-            SURAT, GUJARAT ⚡
-          </span>
-        </div>
-
-        {/* Main Headline */}
-        <h1 style={{
-          fontSize: 'clamp(2.3rem, 5.5vw, 4.2rem)',
-          fontWeight: 900,
-          lineHeight: 1.1,
-          letterSpacing: '-0.03em',
-          maxWidth: '900px',
-          margin: '0 auto 18px auto'
-        }}>
-          Ditch the Boring Tours. <br />
-          <span className="gradient-text">We Plan, You Enjoy.</span>
-        </h1>
-
-        {/* Subtitle */}
-        <p style={{
-          fontSize: 'clamp(1rem, 2vw, 1.2rem)',
-          color: 'var(--text-secondary)',
-          maxWidth: '700px',
-          margin: '0 auto 28px auto',
-          fontWeight: 400
-        }}>
-          Handcrafted stays, group getaways, mountain treks & international adventures from Surat.
-          Zero hidden fees, verified experiences, and a 24/7 WhatsApp concierge.
-        </p>
-
-        {/* Domestic / International Quick Toggle */}
-        <div style={{
-          display: 'inline-flex',
-          background: 'rgba(255,255,255,0.06)',
-          border: '1px solid var(--border-color)',
-          borderRadius: 'var(--radius-full)',
-          padding: '4px',
-          gap: '4px',
-          marginBottom: '24px'
-        }}>
-          <button
-            id="hero-filter-all"
-            onClick={() => setActiveCategory('all')}
+      {/* Background Slides */}
+      {HERO_SLIDES.map((slide, idx) => (
+        <div
+          key={idx}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            opacity: idx === currentSlide ? 1 : 0,
+            transition: 'opacity 1.2s ease-in-out',
+            zIndex: 0
+          }}
+        >
+          <img
+            src={slide.image}
+            alt={slide.titleLine1}
             style={{
-              padding: '8px 20px',
-              borderRadius: 'var(--radius-full)',
-              border: 'none',
-              background: activeCategory === 'all' ? 'var(--sunset-gradient)' : 'transparent',
-              color: activeCategory === 'all' ? '#fff' : 'var(--text-secondary)',
-              fontWeight: 700,
-              fontSize: '0.88rem',
-              cursor: 'pointer',
-              transition: 'var(--transition)',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              fontFamily: 'inherit'
-            }}
-          >
-            <Sparkles size={14} />
-            All Trips
-          </button>
-          <button
-            id="hero-filter-domestic"
-            onClick={() => setActiveCategory('Domestic')}
-            style={{
-              padding: '8px 20px',
-              borderRadius: 'var(--radius-full)',
-              border: 'none',
-              background: activeCategory === 'Domestic' ? 'var(--sunset-gradient)' : 'transparent',
-              color: activeCategory === 'Domestic' ? '#fff' : 'var(--text-secondary)',
-              fontWeight: 700,
-              fontSize: '0.88rem',
-              cursor: 'pointer',
-              transition: 'var(--transition)',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              fontFamily: 'inherit'
-            }}
-          >
-            <Home size={14} />
-            India Trips 🇮🇳
-          </button>
-          <button
-            id="hero-filter-international"
-            onClick={() => setActiveCategory('International')}
-            style={{
-              padding: '8px 20px',
-              borderRadius: 'var(--radius-full)',
-              border: 'none',
-              background: activeCategory === 'International' ? 'var(--sunset-gradient)' : 'transparent',
-              color: activeCategory === 'International' ? '#fff' : 'var(--text-secondary)',
-              fontWeight: 700,
-              fontSize: '0.88rem',
-              cursor: 'pointer',
-              transition: 'var(--transition)',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              fontFamily: 'inherit'
-            }}
-          >
-            <Globe size={14} />
-            International ✈️
-          </button>
-        </div>
-
-        {/* Search Box */}
-        <div style={{
-          maxWidth: '740px',
-          margin: '0 auto 20px auto',
-          background: 'var(--bg-card)',
-          borderRadius: 'var(--radius-full)',
-          padding: '8px 10px 8px 24px',
-          border: '1px solid var(--border-color)',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '12px',
-          boxShadow: 'var(--shadow-md)',
-          backdropFilter: 'blur(16px)'
-        }} className="search-bar-wrap">
-          <MapPin size={22} color="var(--coral-primary)" style={{ flexShrink: 0 }} />
-          <input
-            type="text"
-            id="main-search-input"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Where do you want to go? (e.g. Goa, Ladakh, Bali, Dubai...)"
-            style={{
-              flex: 1,
-              background: 'transparent',
-              border: 'none',
-              outline: 'none',
-              color: 'var(--text-primary)',
-              fontSize: '1rem',
-              fontWeight: 500,
-              fontFamily: 'inherit'
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center',
+              transform: idx === currentSlide ? 'scale(1.04)' : 'scale(1)',
+              transition: 'transform 7s ease-out'
             }}
           />
-          {searchQuery && (
-            <button
-              onClick={() => setSearchQuery('')}
-              style={{
-                background: 'rgba(255,255,255,0.1)',
-                border: 'none',
-                color: 'var(--text-secondary)',
-                borderRadius: '50%',
-                width: '24px',
-                height: '24px',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '0.8rem'
-              }}
-            >
-              ✕
-            </button>
-          )}
-          <button 
-            id="main-search-btn"
-            className="gradient-btn"
-            style={{
-              padding: '12px 28px',
-              fontSize: '0.95rem'
-            }}
-            onClick={() => {
-              const el = document.getElementById('explore-trips');
-              if (el) el.scrollIntoView({ behavior: 'smooth' });
-            }}
-          >
-            <Search size={18} />
-            <span style={{ display: 'inline-block' }}>Find Trips</span>
-          </button>
+          {/* Subtle vignette / atmospheric overlay */}
+          <div style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(180deg, rgba(8, 15, 29, 0.45) 0%, rgba(8, 15, 29, 0.25) 45%, rgba(8, 15, 29, 0.65) 100%)'
+          }} />
         </div>
+      ))}
 
-        {/* Trending Tags */}
-        <div style={{
+      {/* Slide Navigation Arrow Left */}
+      <button
+        onClick={prevSlide}
+        aria-label="Previous Slide"
+        style={{
+          position: 'absolute',
+          left: '24px',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          zIndex: 4,
+          width: '44px',
+          height: '44px',
+          borderRadius: '50%',
+          background: 'rgba(255, 255, 255, 0.88)',
+          color: '#1e293b',
+          border: 'none',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          flexWrap: 'wrap',
+          cursor: 'pointer',
+          boxShadow: '0 4px 14px rgba(0,0,0,0.25)',
+          transition: 'all 0.2s ease'
+        }}
+        onMouseEnter={e => {
+          e.currentTarget.style.background = '#ffffff';
+          e.currentTarget.style.transform = 'translateY(-50%) scale(1.08)';
+        }}
+        onMouseLeave={e => {
+          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.88)';
+          e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
+        }}
+      >
+        <ChevronLeft size={22} strokeWidth={2.5} />
+      </button>
+
+      {/* Slide Navigation Arrow Right */}
+      <button
+        onClick={nextSlide}
+        aria-label="Next Slide"
+        style={{
+          position: 'absolute',
+          right: '24px',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          zIndex: 4,
+          width: '44px',
+          height: '44px',
+          borderRadius: '50%',
+          background: 'rgba(255, 255, 255, 0.88)',
+          color: '#1e293b',
+          border: 'none',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          cursor: 'pointer',
+          boxShadow: '0 4px 14px rgba(0,0,0,0.25)',
+          transition: 'all 0.2s ease'
+        }}
+        onMouseEnter={e => {
+          e.currentTarget.style.background = '#ffffff';
+          e.currentTarget.style.transform = 'translateY(-50%) scale(1.08)';
+        }}
+        onMouseLeave={e => {
+          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.88)';
+          e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
+        }}
+      >
+        <ChevronRight size={22} strokeWidth={2.5} />
+      </button>
+
+      {/* Main Content Area */}
+      <div className="container" style={{
+        position: 'relative',
+        zIndex: 2,
+        textAlign: 'center',
+        padding: '0 20px',
+        maxWidth: '1050px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+      }}>
+        {/* Playful cursive subtitle */}
+        <div style={{
+          display: 'inline-flex',
+          alignItems: 'center',
           gap: '8px',
-          marginBottom: '36px'
+          fontFamily: "'Brush Script MT', 'Caveat', cursive, sans-serif",
+          fontSize: 'clamp(1.4rem, 2.5vw, 1.9rem)',
+          letterSpacing: '0.04em',
+          color: '#ffffff',
+          textShadow: '0 2px 10px rgba(0,0,0,0.6)',
+          marginBottom: '6px'
         }}>
-          <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 600 }}>
-            🔥 Trending:
-          </span>
-          {trendingTags.map(tag => (
-            <button
-              key={tag}
-              id={`trending-tag-${tag.toLowerCase()}`}
-              onClick={() => onQuickSearch(tag)}
-              style={{
-                background: searchQuery.toLowerCase() === tag.toLowerCase() ? 'var(--coral-primary)' : 'rgba(255,255,255,0.06)',
-                color: searchQuery.toLowerCase() === tag.toLowerCase() ? '#fff' : 'var(--text-secondary)',
-                border: '1px solid var(--border-color)',
-                borderRadius: 'var(--radius-full)',
-                padding: '4px 12px',
-                fontSize: '0.8rem',
-                fontWeight: 600,
-                cursor: 'pointer',
-                transition: 'var(--transition)'
-              }}
-            >
-              {tag}
-            </button>
-          ))}
+          <span>{HERO_SLIDES[currentSlide].subtitle}</span>
+          <span style={{ fontSize: '1.2rem', opacity: 0.9 }}>✈️</span>
         </div>
 
-        {/* Feature Badges / Proof */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-          gap: '16px',
-          maxWidth: '960px',
-          margin: '0 auto',
-          padding: '16px 20px',
-          background: 'rgba(255,255,255,0.03)',
-          borderRadius: 'var(--radius-md)',
-          border: '1px solid var(--border-color)'
+        {/* Big Bold Headline */}
+        <h1 style={{
+          fontSize: 'clamp(2.4rem, 5.5vw, 4.2rem)',
+          fontWeight: 900,
+          color: '#ffffff',
+          lineHeight: 1.12,
+          letterSpacing: '-0.02em',
+          textShadow: '0 4px 20px rgba(0,0,0,0.5)',
+          marginBottom: '14px'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', justifyContent: 'center' }}>
-            <div style={{
-              width: '36px', height: '36px', borderRadius: '10px',
-              background: 'rgba(255,56,92,0.15)', color: 'var(--coral-primary)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center'
-            }}>
-              <Compass size={18} />
-            </div>
-            <div style={{ textAlign: 'left' }}>
-              <div style={{ fontWeight: 800, fontSize: '0.95rem' }}>100% Custom</div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Tailored To You</div>
+          {HERO_SLIDES[currentSlide].titleLine1} <br />
+          <span style={{
+            background: 'linear-gradient(90deg, #ff5722 0%, #ff8a00 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            textShadow: 'none'
+          }}>
+            {HERO_SLIDES[currentSlide].titleLine2}
+          </span>
+        </h1>
+
+        {/* Subtitle / Paragraph */}
+        <p style={{
+          fontSize: 'clamp(0.95rem, 1.8vw, 1.15rem)',
+          color: 'rgba(255, 255, 255, 0.92)',
+          maxWidth: '680px',
+          margin: '0 auto 32px auto',
+          lineHeight: 1.5,
+          textShadow: '0 2px 8px rgba(0,0,0,0.7)',
+          fontWeight: 400
+        }}>
+          {HERO_SLIDES[currentSlide].desc}
+        </p>
+
+        {/* Unified Capsule Search Bar */}
+        <div style={{
+          width: '100%',
+          maxWidth: '860px',
+          background: 'rgba(255, 255, 255, 0.97)',
+          backdropFilter: 'blur(12px)',
+          borderRadius: '50px',
+          padding: '8px 10px 8px 24px',
+          display: 'grid',
+          gridTemplateColumns: '1.8fr 1.2fr 1.2fr auto',
+          alignItems: 'center',
+          gap: '12px',
+          boxShadow: '0 12px 35px rgba(0, 0, 0, 0.35)',
+          color: '#1f2937'
+        }} className="hero-capsule-bar">
+          {/* 1. Destination Input */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            textAlign: 'left',
+            paddingRight: '12px',
+            borderRight: '1px solid rgba(0,0,0,0.08)'
+          }}>
+            <MapPin size={22} color="#ff5722" style={{ flexShrink: 0 }} />
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontSize: '0.74rem', fontWeight: 700, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                Where to?
+              </div>
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+                placeholder="e.g. Bali, Thailand, Dubai..."
+                style={{
+                  width: '100%',
+                  background: 'transparent',
+                  border: 'none',
+                  outline: 'none',
+                  fontSize: '0.92rem',
+                  fontWeight: 600,
+                  color: '#111827',
+                  padding: '2px 0'
+                }}
+              />
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', justifyContent: 'center' }}>
-            <div style={{
-              width: '36px', height: '36px', borderRadius: '10px',
-              background: 'rgba(16,185,129,0.15)', color: '#10b981',
-              display: 'flex', alignItems: 'center', justifyContent: 'center'
-            }}>
-              <ShieldCheck size={18} />
-            </div>
-            <div style={{ textAlign: 'left' }}>
-              <div style={{ fontWeight: 800, fontSize: '0.95rem' }}>Honest Pricing</div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Zero Hidden Costs</div>
+          {/* 2. Travel Month Selector */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            textAlign: 'left',
+            paddingRight: '12px',
+            borderRight: '1px solid rgba(0,0,0,0.08)'
+          }}>
+            <Calendar size={20} color="#ff5722" style={{ flexShrink: 0 }} />
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontSize: '0.74rem', fontWeight: 700, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                Travel Month
+              </div>
+              <select
+                value={selectedMonth}
+                onChange={e => setSelectedMonth(e.target.value)}
+                style={{
+                  width: '100%',
+                  background: 'transparent',
+                  border: 'none',
+                  outline: 'none',
+                  fontSize: '0.88rem',
+                  fontWeight: 600,
+                  color: '#111827',
+                  cursor: 'pointer',
+                  padding: '2px 0'
+                }}
+              >
+                {MONTHS.map(m => (
+                  <option key={m} value={m}>{m}</option>
+                ))}
+              </select>
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', justifyContent: 'center' }}>
-            <div style={{
-              width: '36px', height: '36px', borderRadius: '10px',
-              background: 'rgba(139,92,246,0.15)', color: '#a78bfa',
-              display: 'flex', alignItems: 'center', justifyContent: 'center'
-            }}>
-              <Clock size={18} />
-            </div>
-            <div style={{ textAlign: 'left' }}>
-              <div style={{ fontWeight: 800, fontSize: '0.95rem' }}>24/7 Support</div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Instant WhatsApp</div>
+          {/* 3. Travellers Selector */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            textAlign: 'left',
+            paddingRight: '10px'
+          }}>
+            <Users size={20} color="#ff5722" style={{ flexShrink: 0 }} />
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontSize: '0.74rem', fontWeight: 700, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                Travellers
+              </div>
+              <select
+                value={travellerCount}
+                onChange={e => setTravellerCount(e.target.value)}
+                style={{
+                  width: '100%',
+                  background: 'transparent',
+                  border: 'none',
+                  outline: 'none',
+                  fontSize: '0.88rem',
+                  fontWeight: 600,
+                  color: '#111827',
+                  cursor: 'pointer',
+                  padding: '2px 0'
+                }}
+              >
+                <option value="1 Traveller">1 Traveller</option>
+                <option value="2 Travellers">2 Travellers</option>
+                <option value="3-5 Travellers">3-5 Travellers</option>
+                <option value="Squad (6+ Travellers)">Squad (6+)</option>
+              </select>
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', justifyContent: 'center' }}>
-            <div style={{
-              width: '36px', height: '36px', borderRadius: '10px',
-              background: 'rgba(0,242,254,0.15)', color: '#00f2fe',
-              display: 'flex', alignItems: 'center', justifyContent: 'center'
-            }}>
-              <Sparkles size={18} />
-            </div>
-            <div style={{ textAlign: 'left' }}>
-              <div style={{ fontWeight: 800, fontSize: '0.95rem' }}>{totalTours || 165}+ Tours</div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Curated Packages</div>
-            </div>
-          </div>
+          {/* 4. Search CTA Button */}
+          <button
+            onClick={handleSearch}
+            style={{
+              background: 'linear-gradient(135deg, #ff416c 0%, #ff4b2b 50%, #ff8a00 100%)',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '50px',
+              padding: '13px 26px',
+              fontWeight: 700,
+              fontSize: '0.94rem',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              boxShadow: '0 6px 18px rgba(255, 75, 43, 0.4)',
+              transition: 'all 0.25s ease',
+              whiteSpace: 'nowrap'
+            }}
+            onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.03)'}
+            onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+          >
+            <Search size={18} strokeWidth={2.5} />
+            <span>Search Trips</span>
+          </button>
+        </div>
+
+        {/* Carousel Indicators */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          marginTop: '28px'
+        }}>
+          {HERO_SLIDES.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentSlide(i)}
+              aria-label={`Go to slide ${i + 1}`}
+              style={{
+                width: i === currentSlide ? '28px' : '10px',
+                height: '8px',
+                borderRadius: '4px',
+                background: i === currentSlide ? '#ff5722' : 'rgba(255, 255, 255, 0.55)',
+                border: 'none',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                padding: 0
+              }}
+            />
+          ))}
         </div>
       </div>
     </section>

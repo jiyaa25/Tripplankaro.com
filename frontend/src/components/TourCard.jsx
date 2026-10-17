@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Heart, Clock, ArrowRight, MessageCircle, Sparkles, Scale } from 'lucide-react';
+import { Heart, Clock, ArrowRight, MessageCircle, Sparkles } from 'lucide-react';
 import { getTourImage } from '../utils/imageFallback';
 
 export default function TourCard({
@@ -7,9 +7,7 @@ export default function TourCard({
   isSaved,
   onToggleSave,
   onOpenDetails,
-  onQuickWhatsApp,
-  isCompared = false,
-  onToggleCompare
+  onQuickWhatsApp
 }) {
   const {
     tour_id,
@@ -118,7 +116,7 @@ export default function TourCard({
           )}
         </div>
 
-        {/* Action icons: Compare & Wishlist */}
+        {/* Action icons: Wishlist */}
         <div style={{
           position: 'absolute',
           top: '12px',
@@ -127,33 +125,6 @@ export default function TourCard({
           gap: '6px',
           zIndex: 2
         }}>
-          {onToggleCompare && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                onToggleCompare(tour);
-              }}
-              id={`compare-btn-${tour_id}`}
-              title={isCompared ? "Remove from comparison" : "Compare this tour"}
-              style={{
-                width: '34px',
-                height: '34px',
-                borderRadius: '50%',
-                background: isCompared ? 'var(--coral-primary)' : 'rgba(10, 14, 26, 0.65)',
-                backdropFilter: 'blur(8px)',
-                border: 'none',
-                color: '#fff',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer',
-                transition: 'var(--transition)'
-              }}
-            >
-              <Scale size={16} />
-            </button>
-          )}
-
           <button
             onClick={(e) => {
               e.stopPropagation();

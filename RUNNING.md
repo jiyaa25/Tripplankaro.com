@@ -4,7 +4,6 @@
 
 Open Terminal 1:
 
-### Windows PowerShell
 ```powershell
 cd backend
 python -m venv .venv

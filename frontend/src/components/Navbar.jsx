@@ -1,6 +1,19 @@
 import React, { useState } from 'react';
-import { Compass, Heart, Moon, Sun, MessageCircle, Sparkles, Scale, Calculator, Menu, X, BookOpen } from 'lucide-react';
-import companyData from '../data/company.json';
+import {
+  Home,
+  Globe,
+  Palmtree,
+  Calculator,
+  FileEdit,
+  Search,
+  Heart,
+  Moon,
+  Sun,
+  MessageCircle,
+  Sparkles,
+  Menu,
+  X
+} from 'lucide-react';
 import { createWhatsAppLink } from '../utils/whatsapp';
 
 export default function Navbar({
@@ -10,31 +23,44 @@ export default function Navbar({
   openWishlist,
   comparedToursCount = 0,
   openComparison,
-  onNavigate,
-  onOpenGuide
+  activePage = 'home',
+  onSelectPage,
+  onOpenSearch
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const waUrl = createWhatsAppLink('Hey Tripplankaro! I want to plan a trip. Can you help?');
+  const waUrl = createWhatsAppLink('Hey Tripplankaro! I want to plan a holiday. Can you guide me?');
 
-  const handleNavClick = (viewId) => {
+  const navItems = [
+    { id: 'domestic', label: 'Domestic Tour', icon: <Home size={17} color="#ff5722" /> },
+    { id: 'international', label: 'International Tour', icon: <Globe size={17} color="#0284c7" /> },
+    { id: 'theme-tour', label: 'Theme Tour', icon: <Palmtree size={17} color="#10b981" /> },
+    { id: 'vibe-quiz', label: 'Vibe Quiz', icon: <Sparkles size={17} color="#ec4899" /> },
+    { id: 'calculator', label: 'Calculator', icon: <Calculator size={17} color="#8b5cf6" /> },
+    { id: 'custom-tour', label: 'Customized Tour', icon: <FileEdit size={17} color="#f59e0b" /> },
+  ];
+
+  const handleNavClick = (pageId) => {
     setMobileMenuOpen(false);
-    if (onNavigate) onNavigate(viewId);
+    if (onSelectPage) onSelectPage(pageId);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <header className="glass" style={{
+    <header style={{
       position: 'sticky',
       top: 0,
       zIndex: 100,
+      background: 'var(--bg-glass)',
+      backdropFilter: 'blur(16px)',
       borderBottom: '1px solid var(--border-color)',
-      padding: '12px 0',
+      padding: '10px 0',
       transition: 'var(--transition)'
     }}>
       <div className="container" style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        gap: '14px'
+        gap: '16px'
       }}>
         {/* Brand Logo */}
         <div
@@ -43,20 +69,20 @@ export default function Navbar({
           id="nav-logo"
         >
           <div style={{
-            background: 'rgba(255, 255, 255, 0.95)',
+            background: '#ffffff',
             padding: '4px 10px',
             borderRadius: '10px',
             display: 'flex',
             alignItems: 'center',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.12)'
+            boxShadow: '0 2px 8px rgba(0,0,0,0.08)'
           }}>
             <img
               src="/logo.png"
               alt="Tripplankaro - We Plan, You Enjoy"
               style={{
-                height: '36px',
+                height: '38px',
                 width: 'auto',
-                maxWidth: '145px',
+                maxWidth: '150px',
                 objectFit: 'contain',
                 display: 'block'
               }}
@@ -64,73 +90,84 @@ export default function Navbar({
           </div>
         </div>
 
-        {/* Center Nav Links (Desktop) */}
+        {/* Center Nav Links matching user image 2 */}
         <nav style={{
           display: 'flex',
           alignItems: 'center',
-          gap: '20px',
+          gap: '24px',
           fontWeight: 600,
           fontSize: '0.88rem'
         }} className="desktop-nav">
-          <a
-            href="#explore-trips"
-            onClick={() => handleNavClick('tours')}
-            style={{ color: 'var(--text-primary)', textDecoration: 'none', transition: 'var(--transition)' }}
-            onMouseEnter={e => e.currentTarget.style.color = 'var(--coral-primary)'}
-            onMouseLeave={e => e.currentTarget.style.color = 'var(--text-primary)'}
-          >
-            Explore Trips
-          </a>
-          <a
-            href="#destinations"
-            onClick={() => handleNavClick('destinations')}
-            style={{ color: 'var(--text-primary)', textDecoration: 'none', transition: 'var(--transition)' }}
-            onMouseEnter={e => e.currentTarget.style.color = 'var(--coral-primary)'}
-            onMouseLeave={e => e.currentTarget.style.color = 'var(--text-primary)'}
-          >
-            Destinations
-          </a>
-          <a
-            href="#offers-section"
-            onClick={() => handleNavClick('offers')}
-            style={{ color: 'var(--text-primary)', textDecoration: 'none', transition: 'var(--transition)' }}
-            onMouseEnter={e => e.currentTarget.style.color = 'var(--coral-primary)'}
-            onMouseLeave={e => e.currentTarget.style.color = 'var(--text-primary)'}
-          >
-            Offers 🔥
-          </a>
-          <a
-            href="#vibe-quiz"
-            onClick={() => handleNavClick('vibe')}
-            style={{ color: 'var(--text-primary)', textDecoration: 'none', transition: 'var(--transition)' }}
-            onMouseEnter={e => e.currentTarget.style.color = 'var(--coral-primary)'}
-            onMouseLeave={e => e.currentTarget.style.color = 'var(--text-primary)'}
-          >
-            Find My Trip ✨
-          </a>
-          <a
-            href="#trip-calculator"
-            onClick={() => handleNavClick('calculator')}
-            style={{ color: 'var(--text-primary)', textDecoration: 'none', transition: 'var(--transition)' }}
-            onMouseEnter={e => e.currentTarget.style.color = 'var(--coral-primary)'}
-            onMouseLeave={e => e.currentTarget.style.color = 'var(--text-primary)'}
-          >
-            Calculator 🧮
-          </a>
-          <a
-            href="#custom-builder"
-            onClick={() => handleNavClick('builder')}
-            style={{ color: 'var(--text-primary)', textDecoration: 'none', transition: 'var(--transition)' }}
-            onMouseEnter={e => e.currentTarget.style.color = 'var(--coral-primary)'}
-            onMouseLeave={e => e.currentTarget.style.color = 'var(--text-primary)'}
-          >
-            Custom Trip
-          </a>
+          {navItems.map(item => {
+            const isActive = activePage === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => handleNavClick(item.id)}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  padding: '6px 4px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '7px',
+                  cursor: 'pointer',
+                  fontSize: '0.88rem',
+                  fontWeight: isActive ? 700 : 600,
+                  color: isActive ? 'var(--coral-primary)' : 'var(--text-primary)',
+                  position: 'relative',
+                  transition: 'var(--transition)'
+                }}
+                onMouseEnter={e => e.currentTarget.style.color = 'var(--coral-primary)'}
+                onMouseLeave={e => {
+                  if (!isActive) e.currentTarget.style.color = 'var(--text-primary)';
+                }}
+              >
+                {item.icon}
+                <span>{item.label}</span>
+                {isActive && (
+                  <span style={{
+                    position: 'absolute',
+                    bottom: '-4px',
+                    left: 0,
+                    right: 0,
+                    height: '2px',
+                    background: 'var(--coral-primary)',
+                    borderRadius: '2px'
+                  }} />
+                )}
+              </button>
+            );
+          })}
         </nav>
 
-        {/* Right Actions */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          {/* Theme Toggle */}
+        {/* Right Action Icons */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          {/* Search Trigger */}
+          <button
+            onClick={() => {
+              if (onOpenSearch) onOpenSearch();
+              else handleNavClick('domestic');
+            }}
+            title="Search Packages"
+            style={{
+              background: 'rgba(255, 255, 255, 0.08)',
+              border: '1px solid var(--border-color)',
+              width: '38px',
+              height: '38px',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              color: 'var(--text-primary)',
+              transition: 'var(--transition)'
+            }}
+          >
+            <Search size={18} />
+          </button>
+
+          {/* Theme Toggle Button */}
           <button
             onClick={toggleTheme}
             id="theme-toggle-btn"
@@ -152,39 +189,15 @@ export default function Navbar({
             {theme === 'dark' ? <Sun size={18} color="#f59e0b" /> : <Moon size={18} color="#6366f1" />}
           </button>
 
-          {/* Compare Button if items compared */}
-          {comparedToursCount > 0 && (
-            <button
-              onClick={openComparison}
-              title={`Compare ${comparedToursCount} Tours`}
-              style={{
-                background: 'rgba(255, 56, 92, 0.15)',
-                border: '1px solid var(--coral-primary)',
-                padding: '8px 12px',
-                borderRadius: 'var(--radius-full)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                cursor: 'pointer',
-                color: 'var(--coral-primary)',
-                fontWeight: 800,
-                fontSize: '0.82rem'
-              }}
-            >
-              <Scale size={16} />
-              <span>Compare ({comparedToursCount})</span>
-            </button>
-          )}
-
           {/* Wishlist Button */}
           <button
             onClick={openWishlist}
             id="wishlist-toggle-btn"
-            title="My Shortlisted Trips"
+            title="Shortlisted Tours"
             style={{
               background: 'rgba(255, 255, 255, 0.08)',
               border: '1px solid var(--border-color)',
-              padding: '8px 13px',
+              padding: '7px 12px',
               borderRadius: 'var(--radius-full)',
               display: 'flex',
               alignItems: 'center',
@@ -202,42 +215,55 @@ export default function Navbar({
               color: '#fff',
               fontSize: '0.72rem',
               fontWeight: 800,
-              padding: '2px 7px',
+              padding: '1px 6px',
               borderRadius: '10px'
             }}>
               {savedToursCount}
             </span>
           </button>
 
-          {/* WhatsApp CTA (Desktop) */}
+          {/* Chat on WhatsApp CTA */}
           <a
             href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
             id="nav-whatsapp-cta"
-            className="gradient-btn desktop-only"
             style={{
-              padding: '8px 16px',
-              fontSize: '0.84rem',
-              textDecoration: 'none'
+              background: 'linear-gradient(135deg, #ff416c 0%, #ff4b2b 50%, #ff8a00 100%)',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '50px',
+              padding: '8px 18px',
+              fontWeight: 700,
+              fontSize: '0.86rem',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              textDecoration: 'none',
+              boxShadow: '0 4px 14px rgba(255, 75, 43, 0.35)',
+              transition: 'all 0.25s ease'
             }}
+            className="desktop-only"
+            onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.03)'}
+            onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
           >
             <MessageCircle size={16} />
-            <span>Chat on WA</span>
+            <span>Chat on WhatsApp</span>
           </a>
 
-          {/* Mobile Menu Toggle Button */}
+          {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             id="mobile-menu-toggle-btn"
             className="mobile-only"
+            aria-label="Toggle navigation menu"
             style={{
               background: 'rgba(255, 255, 255, 0.08)',
               border: '1px solid var(--border-color)',
               width: '38px',
               height: '38px',
               borderRadius: '50%',
-              display: 'none', // Overridden in CSS for mobile
+              display: 'none',
               alignItems: 'center',
               justifyContent: 'center',
               color: 'var(--text-primary)',
@@ -249,11 +275,11 @@ export default function Navbar({
         </div>
       </div>
 
-      {/* Mobile Drawer Navigation */}
+      {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
         <div style={{
           position: 'fixed',
-          top: '65px',
+          top: '62px',
           left: 0,
           right: 0,
           background: 'var(--bg-secondary)',
@@ -261,101 +287,55 @@ export default function Navbar({
           padding: '20px',
           display: 'flex',
           flexDirection: 'column',
-          gap: '14px',
-          boxShadow: 'var(--shadow-lg)',
-          zIndex: 99
+          gap: '12px',
+          zIndex: 99,
+          boxShadow: 'var(--shadow-lg)'
         }}>
-          <a
-            href="#explore-trips"
-            onClick={() => handleNavClick('tours')}
-            style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: 700, fontSize: '1rem', padding: '6px 0' }}
-          >
-            🏖️ Explore All Trips
-          </a>
-          <a
-            href="#destinations"
-            onClick={() => handleNavClick('destinations')}
-            style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: 700, fontSize: '1rem', padding: '6px 0' }}
-          >
-            📍 Popular Destinations
-          </a>
-          <a
-            href="#offers-section"
-            onClick={() => handleNavClick('offers')}
-            style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: 700, fontSize: '1rem', padding: '6px 0' }}
-          >
-            🔥 Seasonal Offers
-          </a>
-          <a
-            href="#vibe-quiz"
-            onClick={() => handleNavClick('vibe')}
-            style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: 700, fontSize: '1rem', padding: '6px 0' }}
-          >
-            ✨ Find My Trip (Vibe Quiz)
-          </a>
-          <a
-            href="#trip-calculator"
-            onClick={() => handleNavClick('calculator')}
-            style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: 700, fontSize: '1rem', padding: '6px 0' }}
-          >
-            🧮 Trip Budget Calculator
-          </a>
-          <a
-            href="#squad-splitter"
-            onClick={() => handleNavClick('splitter')}
-            style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: 700, fontSize: '1rem', padding: '6px 0' }}
-          >
-            💸 Squad Cost Splitter
-          </a>
-          <a
-            href="#custom-builder"
-            onClick={() => handleNavClick('builder')}
-            style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: 700, fontSize: '1rem', padding: '6px 0' }}
-          >
-            🎒 Custom Trip Builder
-          </a>
-          <a
-            href="#reviews"
-            onClick={() => handleNavClick('reviews')}
-            style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: 700, fontSize: '1rem', padding: '6px 0' }}
-          >
-            📸 Traveler Stories
-          </a>
-
-          <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '14px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          {navItems.map(item => (
             <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                if (onOpenGuide) onOpenGuide();
-              }}
+              key={item.id}
+              onClick={() => handleNavClick(item.id)}
               style={{
+                background: activePage === item.id ? 'rgba(255, 56, 92, 0.12)' : 'transparent',
+                border: 'none',
+                borderRadius: '8px',
+                padding: '12px 14px',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '6px',
-                background: 'transparent',
-                border: 'none',
-                color: 'var(--coral-primary)',
-                fontWeight: 700,
-                fontSize: '0.9rem',
-                cursor: 'pointer',
-                padding: 0
+                gap: '10px',
+                textAlign: 'left',
+                fontSize: '0.95rem',
+                fontWeight: 600,
+                color: activePage === item.id ? 'var(--coral-primary)' : 'var(--text-primary)',
+                cursor: 'pointer'
               }}
             >
-              <BookOpen size={16} />
-              <span>Content & Deployment Guide</span>
+              {item.icon}
+              <span>{item.label}</span>
             </button>
-
-            <a
-              href={waUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="gradient-btn"
-              style={{ padding: '12px', textAlign: 'center', textDecoration: 'none', justifyContent: 'center' }}
-            >
-              <MessageCircle size={18} />
-              <span>Chat on WhatsApp</span>
-            </a>
-          </div>
+          ))}
+          <a
+            href={waUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              marginTop: '8px',
+              background: 'var(--sunset-gradient)',
+              color: '#fff',
+              textAlign: 'center',
+              padding: '12px',
+              borderRadius: '30px',
+              fontWeight: 700,
+              textDecoration: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px'
+            }}
+          >
+            <MessageCircle size={18} />
+            <span>Chat on WhatsApp</span>
+          </a>
         </div>
       )}
     </header>

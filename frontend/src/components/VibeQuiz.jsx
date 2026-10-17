@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Sparkles, ArrowRight, RotateCcw, CheckCircle2, Compass, Heart } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import toursData from '../data/tours.json';
+import { getTourImage } from '../utils/imageFallback';
 
-export default function VibeQuiz({ onSelectVibe, onExploreMatches }) {
+export default function VibeQuiz({ onSelectVibe, onOpenTour }) {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState({
     companion: null,
@@ -331,9 +332,12 @@ export default function VibeQuiz({ onSelectVibe, onExploreMatches }) {
                         gap: '12px'
                       }}
                     >
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                      <div
+                        style={{ display: 'flex', alignItems: 'center', gap: '14px', cursor: onOpenTour ? 'pointer' : 'default' }}
+                        onClick={() => onOpenTour && onOpenTour(t)}
+                      >
                         <img
-                          src={t.image}
+                          src={getTourImage(t.image, t.destination)}
                           alt={t.tour_name}
                           style={{ width: '56px', height: '56px', borderRadius: '10px', objectFit: 'cover' }}
                         />
@@ -367,13 +371,11 @@ export default function VibeQuiz({ onSelectVibe, onExploreMatches }) {
                 <button
                   onClick={() => {
                     if (onSelectVibe) onSelectVibe(result.vibe);
-                    const el = document.getElementById('explore-trips');
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
                   }}
                   className="gradient-btn"
                   style={{ padding: '12px 24px', fontSize: '0.92rem' }}
                 >
-                  <span>Explore My Matches</span>
+                  <span>Explore All Matching Trips</span>
                   <ArrowRight size={16} />
                 </button>
                 <button
