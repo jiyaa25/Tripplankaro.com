@@ -11,24 +11,24 @@ const HERO_SLIDES = [
   },
   {
     image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2000&q=80',
-    subtitle: "Breathtaking Mountain Escapes",
-    titleLine1: "Majestic Peaks & Serene Valleys.",
+    subtitle: "Let's Explore The World",
+    titleLine1: "Your World. Your Journey.",
     titleLine2: "We Plan, You Enjoy.",
-    desc: "Unwind among snow-capped Himalayas, scenic trails, and cozy mountain retreats curated for genuine tranquility."
+    desc: "From tropical escapes to unforgettable city adventures, discover thoughtfully crafted holidays designed around you."
   },
   {
     image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=2000&q=80',
-    subtitle: "International Wonders & Skylines",
-    titleLine1: "Iconic Cities. Golden Sunsets.",
+    subtitle: "Let's Explore The World",
+    titleLine1: "Your World. Your Journey.",
     titleLine2: "We Plan, You Enjoy.",
-    desc: "Handcrafted international getaways with zero hidden charges, seamless luxury stays, and 24/7 dedicated support."
+    desc: "From tropical escapes to unforgettable city adventures, discover thoughtfully crafted holidays designed around you."
   },
   {
     image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2000&q=80',
-    subtitle: "Tropical Beaches & Island Vibes",
-    titleLine1: "Turquoise Waters. Carefree Days.",
+    subtitle: "Let's Explore The World",
+    titleLine1: "Your World. Your Journey.",
     titleLine2: "We Plan, You Enjoy.",
-    desc: "Escape to Andaman, Bali, Maldives, and Thailand with bespoke beach itineraries and private island excursions."
+    desc: "From tropical escapes to unforgettable city adventures, discover thoughtfully crafted holidays designed around you."
   }
 ];
 
