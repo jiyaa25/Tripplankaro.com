@@ -1,7 +1,7 @@
 {
   "name": "Tripplankaro",
   "tagline": "We Plan, You Enjoy",
-  "description": "Custom trips, budget bangers & unforgettable memories crafted for modern travellers.",
+  "description": "Custom trips, budget bangers & unforgettable memories crafted for travellers.",
   "website": "https://tripplankaro.com",
   "email": "info@triplankaro.com",
   "phone": "6353731027",
@@ -15,10 +15,6 @@
     {
       "city": "Surat",
       "address": "UG 12, Blue Arc, Near Althan Garden, Althan Road, Surat – 395007, Gujarat, India"
-    },
-    {
-      "city": "Valsad",
-      "address": "303, 3rd Floor, Millennium Apt, Opp Pragji Tower, Valsad – 396001, Gujarat, India"
     }
   ]
 }

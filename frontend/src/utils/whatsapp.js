@@ -65,17 +65,3 @@ I want help planning a custom trip.
 Please contact me to discuss.`;
 }
 
-export function generateSquadSplitterWhatsAppMessage({
-  tripName,
-  totalCost,
-  memberCount,
-  perPersonCost
-}) {
-  return `Hi Tripplankaro! 👋
-Our squad is planning a trip: *${tripName || 'Epic Squad Trip'}*!
-👥 Total Squad: ${memberCount} members
-💰 Total Budget: ₹${totalCost.toLocaleString('en-IN')}
-💳 Per Person Share: ₹${perPersonCost.toLocaleString('en-IN')}
-
-Can you help us find or plan the best itinerary for this budget?`;
-}
